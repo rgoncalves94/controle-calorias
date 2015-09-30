@@ -67,7 +67,10 @@ public class LoginView extends Application implements Viewable, EventHandler<Act
 		actiontarget = new Text();
 		grid.add(actiontarget, 1, 6);
 
-		primaryStage.setScene(new Scene(grid, 300, 250));
+		Scene scene = new Scene(grid, 300, 250);
+		scene.getStylesheets().add(LoginView.class.getResource("../../../resources/Login.css").toExternalForm());
+		primaryStage.setScene(scene);
+
 		primaryStage.show();
 	}
 
