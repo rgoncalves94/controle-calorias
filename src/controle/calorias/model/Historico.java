@@ -57,5 +57,4 @@ public class Historico {
 	public void setConsumoDia(double consumoDia) {
 		this.consumoDia = consumoDia;
 	}
-
 }

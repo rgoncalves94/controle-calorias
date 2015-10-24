@@ -8,6 +8,7 @@ public class Usuario {
 	private String nome;
 	private Date dataNascimento;
 	private double peso;
+	private double pesoDesejado;
 	private double altura;
 	private Intensidade intensidade;
 	private NivelAtividadeFisica nivelAtvFisica;
@@ -48,6 +49,14 @@ public class Usuario {
 		this.peso = peso;
 	}
 
+	public double getPesoDesejado() {
+		return pesoDesejado;
+	}
+
+	public void setPesoDesejado(double pesoDesejado) {
+		this.pesoDesejado = pesoDesejado;
+	}
+	
 	public double getAltura() {
 		return altura;
 	}
@@ -95,5 +104,4 @@ public class Usuario {
 	public void setHistorico(List<Historico> historico) {
 		this.historico = historico;
 	}
-
 }

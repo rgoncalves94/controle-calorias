@@ -11,9 +11,7 @@ public class Alimento {
 	private double gordurasTotais;
 	private double gordurasSaturadas;
 	private double gordurasTrans;
-
-	private double quantidadeAlimento;
-
+	
 	public long getCodigo() {
 		return codigo;
 	}
@@ -93,13 +91,4 @@ public class Alimento {
 	public void setGordurasTrans(double gordurasTrans) {
 		this.gordurasTrans = gordurasTrans;
 	}
-
-	public double getQuantidadeAlimento() {
-		return quantidadeAlimento;
-	}
-
-	public void setQuantidadeAlimento(double quantidadeAlimento) {
-		this.quantidadeAlimento = quantidadeAlimento;
-	}
-
 }
