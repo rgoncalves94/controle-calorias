@@ -31,5 +31,4 @@ public class Refeicao {
 	public void setListAlimentos(List<Alimento> listAlimentos) {
 		this.listAlimentos = listAlimentos;
 	}
-
 }
