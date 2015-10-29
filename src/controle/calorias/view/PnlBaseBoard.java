@@ -15,10 +15,10 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class PainelBottom extends JPanel {
+public class PnlBaseBoard extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	public PainelBottom() {
+	public PnlBaseBoard() {
 		this.setBackground(Color.DARK_GRAY);
 		this.setSize(1024, 20);
 		this.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0,

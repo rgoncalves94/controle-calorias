@@ -8,10 +8,10 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class PainelTop extends JPanel {
+public class PnlHeader extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	public PainelTop() {
+	public PnlHeader() {
 		this.setSize(1024, 20);
 		this.setBackground(Color.DARK_GRAY);
 		this.setLayout(null);
