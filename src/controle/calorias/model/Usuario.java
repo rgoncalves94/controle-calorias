@@ -10,12 +10,6 @@ public class Usuario {
 	private double peso;
 	private double pesoDesejado;
 	private double altura;
-	private Intensidade intensidade;
-	private NivelAtividadeFisica nivelAtvFisica;
-	private Meta meta;
-
-	private List<AtividadeFisica> listAtividadeFisica;
-	private List<Historico> historico;
 
 	public long getCodigo() {
 		return codigo;
@@ -56,7 +50,7 @@ public class Usuario {
 	public void setPesoDesejado(double pesoDesejado) {
 		this.pesoDesejado = pesoDesejado;
 	}
-	
+
 	public double getAltura() {
 		return altura;
 	}
@@ -65,43 +59,4 @@ public class Usuario {
 		this.altura = altura;
 	}
 
-	public Intensidade getIntensidade() {
-		return intensidade;
-	}
-
-	public void setIntensidade(Intensidade intensidade) {
-		this.intensidade = intensidade;
-	}
-
-	public NivelAtividadeFisica getNivelAtvFisica() {
-		return nivelAtvFisica;
-	}
-
-	public void setNivelAtvFisica(NivelAtividadeFisica nivelAtvFisica) {
-		this.nivelAtvFisica = nivelAtvFisica;
-	}
-
-	public Meta getMeta() {
-		return meta;
-	}
-
-	public void setMeta(Meta meta) {
-		this.meta = meta;
-	}
-
-	public List<AtividadeFisica> getListAtividadeFisica() {
-		return listAtividadeFisica;
-	}
-
-	public void setListAtividadeFisica(List<AtividadeFisica> listAtividadeFisica) {
-		this.listAtividadeFisica = listAtividadeFisica;
-	}
-
-	public List<Historico> getHistorico() {
-		return historico;
-	}
-
-	public void setHistorico(List<Historico> historico) {
-		this.historico = historico;
-	}
 }

@@ -1,19 +1,28 @@
 package controle.calorias.model;
 
+import java.util.Date;
 import java.util.List;
 
 public class Refeicao {
-	private long codigo;
+	private long id;
+	private Date data;
 	private TipoRefeicao tipoRefeicao;
-
 	private List<Alimento> listAlimentos;
 
-	public long getCodigo() {
-		return codigo;
+	public long getId() {
+		return id;
 	}
 
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public Date getData() {
+		return data;
+	}
+
+	public void setData(Date data) {
+		this.data = data;
 	}
 
 	public TipoRefeicao getTipoRefeicao() {
