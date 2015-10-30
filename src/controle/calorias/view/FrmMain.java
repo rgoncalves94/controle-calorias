@@ -8,7 +8,7 @@ public class FrmMain extends JFrame {
 	private FrmMainPnlPerfil pnlPerfil;
 	private FrmMainPnlDados pnlDados;
 	private FrmMainPnlAlimentos pnlAlimentos;
-	private FrmMainPnlExercicios pnlExercicios;
+	private FrmMainPnlAtividades pnlAtividades;
 	private PnlBaseBoard pnlBaseBoard;
 
 	public FrmMain() {
@@ -35,9 +35,9 @@ public class FrmMain extends JFrame {
 		pnlAlimentos.setLocation(612, 40);
 		this.add(pnlAlimentos);
 		
-		pnlExercicios = new FrmMainPnlExercicios();
-		pnlExercicios.setLocation(612, 360);
-		this.add(pnlExercicios);
+		pnlAtividades = new FrmMainPnlAtividades();
+		pnlAtividades.setLocation(612, 360);
+		this.add(pnlAtividades);
 
 		pnlBaseBoard = new PnlBaseBoard();
 		pnlBaseBoard.setLocation(0, 680);

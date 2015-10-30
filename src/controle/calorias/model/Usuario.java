@@ -1,10 +1,11 @@
 package controle.calorias.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Usuario {
-	private long codigo;
+	private int id;
 	private String nome;
 	private Date dataNascimento;
 	private double peso;
@@ -13,16 +14,16 @@ public class Usuario {
 	private Intensidade intensidade;
 	private NivelAtividadeFisica nivelAtvFisica;
 	private Meta meta;
-
-	private List<AtividadeFisica> listAtividadeFisica;
-	private List<Historico> historico;
-
-	public long getCodigo() {
-		return codigo;
+	
+	private List<RegistroAtividadeFisica> registroAtividades = new ArrayList<RegistroAtividadeFisica>();
+	private List<Historico> historico = new ArrayList<Historico>();
+	
+	public int getId() {
+		return id;
 	}
 
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getNome() {
@@ -56,7 +57,7 @@ public class Usuario {
 	public void setPesoDesejado(double pesoDesejado) {
 		this.pesoDesejado = pesoDesejado;
 	}
-	
+
 	public double getAltura() {
 		return altura;
 	}
@@ -89,12 +90,13 @@ public class Usuario {
 		this.meta = meta;
 	}
 
-	public List<AtividadeFisica> getListAtividadeFisica() {
-		return listAtividadeFisica;
+	public List<RegistroAtividadeFisica> getRegistroAtividades() {
+		return registroAtividades;
 	}
 
-	public void setListAtividadeFisica(List<AtividadeFisica> listAtividadeFisica) {
-		this.listAtividadeFisica = listAtividadeFisica;
+	public void setRegistroAtividades(
+			List<RegistroAtividadeFisica> registroAtividades) {
+		this.registroAtividades = registroAtividades;
 	}
 
 	public List<Historico> getHistorico() {

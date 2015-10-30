@@ -9,7 +9,7 @@ public class Historico {
 	private double tbmRecomendada;
 	private double pesoDia;
 	private double consumoDia;
-
+	
 	public Date getData() {
 		return data;
 	}

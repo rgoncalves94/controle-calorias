@@ -6,7 +6,7 @@ public class FrmCRUD extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private PnlHeader pnlHeader;
 	private FrmCRUDPnlALimentos frmCRUDPnlAlimentos;
-	private FrmCRUDPnlExercicios frmCRUDPnlExercicios;
+	private FrmCRUDPnlAtividades frmCRUDPnlExercicios;
 	private PnlBaseBoard painelBottom;
 
 	public FrmCRUD() {
@@ -25,7 +25,7 @@ public class FrmCRUD extends JFrame {
 		frmCRUDPnlAlimentos.setLocation(0, 20);
 		this.add(frmCRUDPnlAlimentos);
 		
-		frmCRUDPnlExercicios = new FrmCRUDPnlExercicios();
+		frmCRUDPnlExercicios = new FrmCRUDPnlAtividades();
 		frmCRUDPnlExercicios.setLocation(0, 350);
 		this.add(frmCRUDPnlExercicios);
 

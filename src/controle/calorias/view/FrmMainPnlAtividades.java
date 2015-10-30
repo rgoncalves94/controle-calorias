@@ -5,10 +5,10 @@ import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class FrmMainPnlExercicios extends JPanel {
+public class FrmMainPnlAtividades extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	public FrmMainPnlExercicios() {
+	public FrmMainPnlAtividades() {
 		this.setBackground(Color.GREEN);
 		this.setSize(412, 320);
 
