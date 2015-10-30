@@ -1,22 +1,23 @@
 package controle.calorias.model;
 
-public class Meta {
-	private long codigo;
-	private String descricao;
+public enum Meta {
+	PERDER_PESO(1, "Perder Peso"), 
+	MANTER_PESO(2, "Manter Peso"), 
+	GANHAR_PESO(3, "Ganhar Peso");
 
-	public long getCodigo() {
-		return codigo;
+	private int id;
+	private String texto;
+
+	private Meta(int id, String texto) {
+		this.id = id;
+		this.texto = texto;
 	}
 
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+	public int getId() {
+		return id;
 	}
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public String getTexto() {
+		return texto;
 	}
 }

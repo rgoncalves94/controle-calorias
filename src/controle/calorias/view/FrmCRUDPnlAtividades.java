@@ -6,11 +6,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class FrmCRUDPnlExercicios extends JPanel {
+public class FrmCRUDPnlAtividades extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public FrmCRUDPnlExercicios() {
+	public FrmCRUDPnlAtividades() {
 		this.setBackground(Color.BLUE);
 		this.setSize(1024, 330);
 		this.setLayout(null);

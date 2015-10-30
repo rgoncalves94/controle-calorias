@@ -1,24 +1,24 @@
 package controle.calorias.model;
 
 public class AtividadeFisica {
-	private long codigo;
-	private String descricao;
+	private int id;
+	private String nome;
 	private double gastoCalorico;
 
-	public long getCodigo() {
-		return codigo;
+	public int getId() {
+		return id;
 	}
 
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+	public void setId(int id) {
+		this.id = id;
 	}
 
-	public String getDescricao() {
-		return descricao;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public double getGastoCalorico() {
@@ -28,5 +28,4 @@ public class AtividadeFisica {
 	public void setGastoCalorico(double gastoCalorico) {
 		this.gastoCalorico = gastoCalorico;
 	}
-
 }

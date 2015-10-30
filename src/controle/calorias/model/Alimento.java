@@ -1,9 +1,11 @@
 package controle.calorias.model;
 
 public class Alimento {
-	private long codigo;
+	private int id;
 	private String descricao;
 	private double valorEnergetico;
+	private Porcao unidadePorcao;
+	private double valorPorcao;
 	private double proteinas;
 	private double fibras;
 	private double carboidrato;
@@ -11,13 +13,13 @@ public class Alimento {
 	private double gordurasTotais;
 	private double gordurasSaturadas;
 	private double gordurasTrans;
-	
-	public long getCodigo() {
-		return codigo;
+
+	public int getId() {
+		return id;
 	}
 
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getDescricao() {
@@ -34,6 +36,22 @@ public class Alimento {
 
 	public void setValorEnergetico(double valorEnergetico) {
 		this.valorEnergetico = valorEnergetico;
+	}
+
+	public Porcao getUnidadePorcao() {
+		return unidadePorcao;
+	}
+
+	public void setUnidadePorcao(Porcao unidadePorcao) {
+		this.unidadePorcao = unidadePorcao;
+	}
+
+	public double getValorPorcao() {
+		return valorPorcao;
+	}
+
+	public void setValorPorcao(double valorPorcao) {
+		this.valorPorcao = valorPorcao;
 	}
 
 	public double getProteinas() {
