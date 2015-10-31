@@ -1,18 +1,36 @@
 package controle.calorias.view;
 
-import javax.swing.JFrame;
+import java.awt.EventQueue;
 
-import controle.calorias.model.Refeicao;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 
 public class RefeicaoView {
 
-	public RefeicaoView(Refeicao refeicao) {
+	JFrame frame = new JFrame("Controle de Calorias");
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		new RefeicaoView();
 	}
 
+	/**
+	 * Create the application.
+	 */
 	public RefeicaoView() {
-		this(null);
+		initialize();
 	}
 
-	public JFrame frameLocal = new JFrame("Manter Refeição - Sistema de Controle de Calorias");
+	/**
+	 * Initialize the contents of the frame.
+	 */
+	private void initialize() {
+		frame.setBounds(100, 100, 450, 300);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
+		frame.setLocationRelativeTo(null);
+	}
+
 }
