@@ -1,21 +1,19 @@
 package controle.calorias.model;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class Refeicao {
-	private int id;
+	private long id;
 	private Date data;
 	private TipoRefeicao tipoRefeicao;
-	
-	private List<ItemRefeicao> alimentos = new ArrayList<ItemRefeicao>();
+	private List<Alimento> listAlimentos;
 
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -35,11 +33,11 @@ public class Refeicao {
 		this.tipoRefeicao = tipoRefeicao;
 	}
 
-	public List<ItemRefeicao> getAlimentos() {
-		return alimentos;
+	public List<Alimento> getListAlimentos() {
+		return listAlimentos;
 	}
-	
-	public void setAlimentos(List<ItemRefeicao> alimentos) {
-		this.alimentos = alimentos;
+
+	public void setListAlimentos(List<Alimento> listAlimentos) {
+		this.listAlimentos = listAlimentos;
 	}
 }
