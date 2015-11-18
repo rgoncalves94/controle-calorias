@@ -183,7 +183,7 @@ public class AtividadeFisicaController implements TableModel , ListSelectionList
 	@Override
 	public void keyTyped(KeyEvent e) {
 		String nomeComponente = e.getComponent().getName();
-
+		
 		if (nomeComponente.equals("txtGastoCalorico")) {
 			String aceitos = "0123456789.";
 			if (!aceitos.contains("" + e.getKeyChar())) {

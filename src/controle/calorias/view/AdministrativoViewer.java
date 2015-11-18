@@ -36,13 +36,12 @@ public class AdministrativoViewer implements ActionListener{
 	private JScrollPane pnlTabela;
 	private JTable tabela;
 
-	private JLabel lblAcessoAdministrativo;
-
 	private JTextField txtId;
 	private JTextField txtNome;
 	private JTextField txtGastoCalorico;
 	private JTextField txtFiltro;
 
+	private JButton btnAcessoAdministrativo;
 	private JButton btnAlimento;
 	private JButton btnAtividade;
 	private JButton btnSalvar;
@@ -59,7 +58,7 @@ public class AdministrativoViewer implements ActionListener{
 		contentPane.add(getPnlRodape());
 
 		frame = new JFrame("SLIMSOFT");
-		frame.setBounds(0, 0, 1024, 728);
+		frame.setBounds(0, 0, 1030, 728);
 		frame.setVisible(true);
 		frame.setResizable(false);
 		frame.setLocationRelativeTo(null);
@@ -68,26 +67,21 @@ public class AdministrativoViewer implements ActionListener{
 	}
 	
 	private JPanel getPnlCabecalho() {
-		Color colorOne = Color.decode("#66CDAA");
-		Color colorTwo = Color.WHITE;
-		
-		MouseEvents mouseEvents = new MouseEvents();
-		mouseEvents.setColor1(colorOne);
-		mouseEvents.setColor2(colorTwo);
-		
 		pnlCabecalho = new JPanel();
 		pnlCabecalho.setLayout(null);	
 		pnlCabecalho.setBounds(0, 0, 1024, 30);
 		pnlCabecalho.setBackground(Color.DARK_GRAY);
 		
-		lblAcessoAdministrativo = new JLabel(" Acesso Administrativo");
-		lblAcessoAdministrativo.setIcon(new ImageIcon(AdministrativoViewer.class.getResource("/resource/icons/config2.png")));
-		lblAcessoAdministrativo.setBounds(844, 5, 180, 20);
-		lblAcessoAdministrativo.setForeground(colorTwo);
-		lblAcessoAdministrativo.setBackground(colorOne);
-		lblAcessoAdministrativo.setCursor(new Cursor(Cursor.HAND_CURSOR));
-		lblAcessoAdministrativo.addMouseListener(mouseEvents);
-		pnlCabecalho.add(lblAcessoAdministrativo);
+		btnAcessoAdministrativo = new JButton(" Voltar Principal");
+		btnAcessoAdministrativo.setActionCommand("Voltar");
+		btnAcessoAdministrativo.addActionListener(this);
+		btnAcessoAdministrativo.setBounds(844, 5, 180, 20);
+		btnAcessoAdministrativo.setForeground(Color.WHITE);
+		btnAcessoAdministrativo.setBackground(Color.DARK_GRAY);
+		btnAcessoAdministrativo.setCursor(new Cursor(Cursor.HAND_CURSOR));
+		btnAcessoAdministrativo.setBorder(BorderFactory.createEmptyBorder());
+		btnAcessoAdministrativo.setIcon(new ImageIcon(PrincipalViewer.class.getResource("/resource/icons/config2.png")));
+		pnlCabecalho.add(btnAcessoAdministrativo);
 		
 		return pnlCabecalho;
 	}
@@ -95,10 +89,7 @@ public class AdministrativoViewer implements ActionListener{
 	private JPanel getPnlMenu() {
 		Color colorOne = Color.DARK_GRAY;
 		Color colorTwo = Color.decode("#66CDAA");
-		
-		MouseEvents mouseEvents = new MouseEvents();
-		mouseEvents.setColor1(colorOne);
-		mouseEvents.setColor2(colorTwo);
+		MouseEvents mouseEvents = new MouseEvents(colorOne, colorTwo);
 		
 		pnlMenu = new JPanel();
 		pnlMenu.setLayout(null);
@@ -140,11 +131,8 @@ public class AdministrativoViewer implements ActionListener{
 
 	private JPanel getPnlAtividade() {
 		Color colorOne = Color.DARK_GRAY;
-		Color colorTwo = Color.decode("#66CDAA");
-		
-		MouseEvents mouseEvents = new MouseEvents(); 
-		mouseEvents.setColor1(colorOne);
-		mouseEvents.setColor2(colorTwo);
+		Color colorTwo = Color.decode("#66CDAA");		
+		MouseEvents mouseEvents = new MouseEvents(colorOne, colorTwo); 
 		
 		pnlAtividade = new JPanel();
 		pnlAtividade.setLayout(null);
@@ -243,7 +231,7 @@ public class AdministrativoViewer implements ActionListener{
 		
 		txtFiltro = new JTextField();
 		txtFiltro.setName("txtFiltro");
-		txtFiltro.setBounds(100, 276, 923, 24);
+		txtFiltro.setBounds(100, 276, 924, 24);
 		txtFiltro.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode("#5F9EA0")));
 		txtFiltro.addKeyListener(ctrlAtividade);
 		pnlAtividade.add(txtFiltro);
@@ -271,7 +259,6 @@ public class AdministrativoViewer implements ActionListener{
 	public JScrollPane getPnlTabela(){
 		tabela = new JTable(ctrlAtividade);
 		tabela.setBackground(Color.WHITE);
-		tabela.setAutoCreateRowSorter(true);
 		tabela.getTableHeader().setBackground(Color.decode("#5F9EA0"));
 		tabela.getTableHeader().setForeground(Color.WHITE);
 		tabela.getColumnModel().getColumn(0).setPreferredWidth(100);
@@ -288,7 +275,7 @@ public class AdministrativoViewer implements ActionListener{
 		
 		pnlTabela = new JScrollPane();
 		pnlTabela.setAutoscrolls(true);
-		pnlTabela.setBounds(0, 300, 1020, 240);
+		pnlTabela.setBounds(0, 300, 1024, 240);
 		pnlTabela.setBorder(BorderFactory.createEmptyBorder());
 		pnlTabela.setViewportView(tabela);
 		return pnlTabela;
@@ -298,11 +285,17 @@ public class AdministrativoViewer implements ActionListener{
 		return this.tabela;
 	}
 	
+	public void limparCampos(){
+		txtId.setText("");
+		txtNome.setText("");
+		txtGastoCalorico.setText("");
+	}
+	
 	public boolean validarPreenchimento(){
 		boolean resultado = true;
 		
 		if (txtNome.getText().isEmpty()) {
-			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Nome!");
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Atividade Física!");
 			resultado = false;
 		} else if (txtGastoCalorico.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Gasto Calórico!");			
@@ -326,12 +319,6 @@ public class AdministrativoViewer implements ActionListener{
 		return atividade;
 	}
 	
-	public void limparCampos(){
-		txtId.setText("");
-		txtNome.setText("");
-		txtGastoCalorico.setText("");
-	}
-	
 	public void controlToView(AtividadeFisica atividade){
 		txtId.setText(String.valueOf(atividade.getId()));
 		txtNome.setText(atividade.getNome());
@@ -353,9 +340,12 @@ public class AdministrativoViewer implements ActionListener{
 			this.pnlAlimento.setVisible(false);
 			this.pnlAlimento.setEnabled(false);
 			this.txtNome.requestFocus();
+		} else if (cmd.equals("Voltar")){
+			new PrincipalViewer();
+			this.frame.dispose();
 		}
 	}
-
+	
 	public static void main(String[] args) {
 		new AdministrativoViewer();
 	}

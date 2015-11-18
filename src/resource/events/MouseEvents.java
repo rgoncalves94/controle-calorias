@@ -8,22 +8,20 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
+import controle.calorias.view.AdministrativoViewer;
+
 public class MouseEvents implements MouseListener{
 	private Color color1;
-	
-	public void setColor1(Color color1) {
-		this.color1 = color1;
-	}
+	private Color color2;
 
-	public void setColor2(Color color2) {
+	public MouseEvents(Color color1, Color color2) {
+		this.color1 = color1;
 		this.color2 = color2;
 	}
 
-	private Color color2;
-	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
+
 	}
 
 	@Override
