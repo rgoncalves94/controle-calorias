@@ -6,6 +6,7 @@ import java.util.List;
 public class Refeicao {
 	private long id;
 	private Date data;
+	private Usuario usuario;
 	private TipoRefeicao tipoRefeicao;
 	private List<Alimento> listAlimentos;
 
@@ -23,6 +24,14 @@ public class Refeicao {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 	public TipoRefeicao getTipoRefeicao() {

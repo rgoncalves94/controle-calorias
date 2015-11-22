@@ -1,15 +1,15 @@
 package controle.calorias.model;
 
 public class TipoRefeicao {
-	private long codigo;
+	private long id;
 	private String descricao;
 
-	public long getCodigo() {
-		return codigo;
+	public long getId() {
+		return id;
 	}
 
-	public void setCodigo(long codigo) {
-		this.codigo = codigo;
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getDescricao() {
@@ -19,4 +19,5 @@ public class TipoRefeicao {
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
+
 }
