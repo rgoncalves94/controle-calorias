@@ -208,7 +208,7 @@ public class AdministrativoViewer implements ActionListener {
 		txtValorEnergetico.setName("txtValorEnergetico");
 		txtValorEnergetico.setBounds(107, 174, 70, 25);
 		txtValorEnergetico.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
-		txtValorEnergetico.addKeyListener(ctrlAtividade);
+		txtValorEnergetico.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(txtValorEnergetico);
 
 		JLabel lblPorcao = new JLabel("Porção");
@@ -222,7 +222,7 @@ public class AdministrativoViewer implements ActionListener {
 		cmbPorcao.setName("cmbPorcao");
 		cmbPorcao.setBounds(350, 78, 150, 25);
 		cmbPorcao.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
-		cmbPorcao.addKeyListener(ctrlAtividade);
+		cmbPorcao.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(cmbPorcao);
 
 		JLabel lblValorPorcao = new JLabel("Valor Porção");
@@ -234,7 +234,7 @@ public class AdministrativoViewer implements ActionListener {
 		txtValorPorcao.setName("txtValorPorcao");
 		txtValorPorcao.setBounds(350, 126, 110, 25);
 		txtValorPorcao.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
-		txtValorPorcao.addKeyListener(ctrlAtividade);
+		txtValorPorcao.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(txtValorPorcao);
 
 		JLabel lblProteinas = new JLabel("Proteínas");
@@ -246,7 +246,7 @@ public class AdministrativoViewer implements ActionListener {
 		txtProteinas.setName("txtProteinas");
 		txtProteinas.setBounds(350, 174, 110, 25);
 		txtProteinas.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
-		txtProteinas.addKeyListener(ctrlAtividade);
+		txtProteinas.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(txtProteinas);
 
 		JLabel lblFibras = new JLabel("Fibras");
@@ -258,7 +258,7 @@ public class AdministrativoViewer implements ActionListener {
 		txtFibras.setName("txtFibras");
 		txtFibras.setBounds(550, 78, 110, 25);
 		txtFibras.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
-		txtFibras.addKeyListener(ctrlAtividade);
+		txtFibras.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(txtFibras);
 
 		JLabel lblCarboidratos = new JLabel("Carboidratos");
@@ -270,7 +270,7 @@ public class AdministrativoViewer implements ActionListener {
 		txtCarboidratos.setName("txtCarboidratos");
 		txtCarboidratos.setBounds(550, 126, 110, 25);
 		txtCarboidratos.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
-		txtCarboidratos.addKeyListener(ctrlAtividade);
+		txtCarboidratos.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(txtCarboidratos);
 
 		JLabel lblSodio = new JLabel("Sódio");
@@ -282,7 +282,7 @@ public class AdministrativoViewer implements ActionListener {
 		txtSodio.setName("txtSodio");
 		txtSodio.setBounds(550, 174, 110, 25);
 		txtSodio.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
-		txtSodio.addKeyListener(ctrlAtividade);
+		txtSodio.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(txtSodio);
 
 		JLabel lblGordurasTotais = new JLabel("G. Totais");
@@ -294,7 +294,7 @@ public class AdministrativoViewer implements ActionListener {
 		txtGordurasTotais.setName("txtGordurasTotais");
 		txtGordurasTotais.setBounds(800, 78, 110, 25);
 		txtGordurasTotais.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
-		txtGordurasTotais.addKeyListener(ctrlAtividade);
+		txtGordurasTotais.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(txtGordurasTotais);
 
 		JLabel lblGordurasSaturadas = new JLabel("G. Saturadas");
@@ -306,7 +306,7 @@ public class AdministrativoViewer implements ActionListener {
 		txtGordurasSaturadas.setName("txtGordurasSaturadas");
 		txtGordurasSaturadas.setBounds(800, 126, 110, 25);
 		txtGordurasSaturadas.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
-		txtGordurasSaturadas.addKeyListener(ctrlAtividade);
+		txtGordurasSaturadas.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(txtGordurasSaturadas);
 
 		JLabel lblGordurasTrans = new JLabel("G. Trans");
@@ -318,43 +318,43 @@ public class AdministrativoViewer implements ActionListener {
 		txtGordurasTrans.setName("txtGordurasTrans");
 		txtGordurasTrans.setBounds(800, 174, 110, 25);
 		txtGordurasTrans.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.LIGHT_GRAY));
-		txtGordurasTrans.addKeyListener(ctrlAtividade);
+		txtGordurasTrans.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(txtGordurasTrans);
 
 		btnSalvarAlimento = new JButton("     Salvar");
 		btnSalvarAlimento.setIcon(new ImageIcon(AdministrativoViewer.class.getResource("/resource/icons/save2.png")));
-		btnSalvarAlimento.setActionCommand("Salvar");
+		btnSalvarAlimento.setActionCommand("SalvarAlimento");
 		btnSalvarAlimento.setBounds(107, 215, 268, 40);
 		btnSalvarAlimento.setForeground(colorTwo);
 		btnSalvarAlimento.setBackground(colorOne);
 		btnSalvarAlimento.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnSalvarAlimento.setBorder(BorderFactory.createEmptyBorder());
 		btnSalvarAlimento.addMouseListener(mouseEvents);
-		btnSalvarAlimento.addActionListener(ctrlAtividade);
+		btnSalvarAlimento.addActionListener(ctrlAlimento);
 		pnlAlimento.add(btnSalvarAlimento);
 
 		btnExcluirAlimento = new JButton("     Excluir");
 		btnExcluirAlimento.setIcon(new ImageIcon(AdministrativoViewer.class.getResource("/resource/icons/remove.png")));
-		btnExcluirAlimento.setActionCommand("Excluir");
+		btnExcluirAlimento.setActionCommand("ExcluirAlimento");
 		btnExcluirAlimento.setBounds(377, 215, 268, 40);
 		btnExcluirAlimento.setForeground(colorTwo);
 		btnExcluirAlimento.setBackground(colorOne);
 		btnExcluirAlimento.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnExcluirAlimento.setBorder(BorderFactory.createEmptyBorder());
 		btnExcluirAlimento.addMouseListener(mouseEvents);
-		btnExcluirAlimento.addActionListener(ctrlAtividade);
+		btnExcluirAlimento.addActionListener(ctrlAlimento);
 		pnlAlimento.add(btnExcluirAlimento);
 
 		btnLimparAlimento = new JButton("     Limpar Campos");
 		btnLimparAlimento.setIcon(new ImageIcon(AdministrativoViewer.class.getResource("/resource/icons/erase.png")));
-		btnLimparAlimento.setActionCommand("Limpar Campos");
+		btnLimparAlimento.setActionCommand("Limpar Campos Alimento");
 		btnLimparAlimento.setBounds(647, 215, 268, 40);
 		btnLimparAlimento.setForeground(colorTwo);
 		btnLimparAlimento.setBackground(colorOne);
 		btnLimparAlimento.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnLimparAlimento.setBorder(BorderFactory.createEmptyBorder());
 		btnLimparAlimento.addMouseListener(mouseEvents);
-		btnLimparAlimento.addActionListener(ctrlAtividade);
+		btnLimparAlimento.addActionListener(ctrlAlimento);
 		pnlAlimento.add(btnLimparAlimento);
 
 		JLabel lblFiltroAlimento = new JLabel(" Filtrar tabela");
@@ -369,7 +369,7 @@ public class AdministrativoViewer implements ActionListener {
 		txtFiltroAlimento.setName("txtFiltroAlimento");
 		txtFiltroAlimento.setBounds(100, 276, 924, 24);
 		txtFiltroAlimento.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.decode("#5F9EA0")));
-		txtFiltroAlimento.addKeyListener(ctrlAtividade);
+		txtFiltroAlimento.addKeyListener(ctrlAlimento);
 		pnlAlimento.add(txtFiltroAlimento);
 
 		pnlAlimento.add(getPnlTabelaAlimento());
@@ -589,9 +589,18 @@ public class AdministrativoViewer implements ActionListener {
 	}
 
 	public void limparCamposAlimento() {
-		txtId.setText("");
-		txtNome.setText("");
-		txtGastoCalorico.setText("");
+		txtAlimentoId.setText("");
+		txtAlimentoNome.setText("");
+		txtValorEnergetico.setText("");
+		cmbPorcao.setSelectedIndex(0);
+		txtValorPorcao.setText("");
+		txtProteinas.setText("");
+		txtFibras.setText("");
+		txtCarboidratos.setText("");
+		txtSodio.setText("");
+		txtGordurasTotais.setText("");
+		txtGordurasSaturadas.setText("");
+		txtGordurasTrans.setText("");
 	}
 
 	public boolean validarPreenchimento() {
@@ -602,6 +611,44 @@ public class AdministrativoViewer implements ActionListener {
 			resultado = false;
 		} else if (txtGastoCalorico.getText().isEmpty()) {
 			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Gasto Calórico!");
+			resultado = false;
+		}
+
+		return resultado;
+	}
+
+	public boolean validarPreenchimentoAlimento() {
+		boolean resultado = true;
+
+		if (txtAlimentoNome.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Nome do Alimento!");
+			resultado = false;
+		} else if (txtValorEnergetico.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Valor Energético!");
+			resultado = false;
+		} else if (txtValorPorcao.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Valor Energético!");
+			resultado = false;
+		} else if (txtProteinas.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Proteinas!");
+			resultado = false;
+		} else if (txtFibras.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Fibras!");
+			resultado = false;
+		} else if (txtCarboidratos.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Carboidratos!");
+			resultado = false;
+		} else if (txtSodio.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Sódio!");
+			resultado = false;
+		} else if (txtGordurasTotais.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Gordutas Totais!");
+			resultado = false;
+		} else if (txtGordurasSaturadas.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Gorduras Saturadas!");
+			resultado = false;
+		} else if (txtGordurasTrans.getText().isEmpty()) {
+			JOptionPane.showMessageDialog(null, "Favor Preencher Campo Gorduras Trans!");
 			resultado = false;
 		}
 
@@ -628,19 +675,19 @@ public class AdministrativoViewer implements ActionListener {
 		if (txtAlimentoId.getText().isEmpty()) {
 			alimento.setId(0);
 		} else {
-			alimento.setId(Integer.parseInt(txtId.getText()));
+			alimento.setId(Long.parseLong(txtAlimentoId.getText()));
 		}
 		alimento.setNome(txtAlimentoNome.getText());
-		alimento.setValorEnergetico(Double.parseDouble(txtValorEnergetico.getText()));
+		alimento.setValorEnergetico(Double.parseDouble(txtValorEnergetico.getText().replace(',', '.')));
 		alimento.setPorcao((Porcao) cmbPorcao.getSelectedItem());
-		alimento.setValorEnergetico(Double.parseDouble(txtValorPorcao.getText()));
-		alimento.setProteinas(Double.parseDouble(txtProteinas.getText()));
-		alimento.setFibras(Double.parseDouble(txtFibras.getText()));
-		alimento.setCarboidrato(Double.parseDouble(txtCarboidratos.getText()));
-		alimento.setSodio(Double.parseDouble(txtSodio.getText()));
-		alimento.setGordurasTotais(Double.parseDouble(txtGordurasTotais.getText()));
-		alimento.setGordurasSaturadas(Double.parseDouble(txtGordurasSaturadas.getText()));
-		alimento.setGordurasTrans(Double.parseDouble(txtGordurasTrans.getText()));
+		alimento.setValorPorcao(Double.parseDouble(txtValorPorcao.getText().replace(',', '.')));
+		alimento.setProteinas(Double.parseDouble(txtProteinas.getText().replace(',', '.')));
+		alimento.setFibras(Double.parseDouble(txtFibras.getText().replace(',', '.')));
+		alimento.setCarboidrato(Double.parseDouble(txtCarboidratos.getText().replace(',', '.')));
+		alimento.setSodio(Double.parseDouble(txtSodio.getText().replace(',', '.')));
+		alimento.setGordurasTotais(Double.parseDouble(txtGordurasTotais.getText().replace(',', '.')));
+		alimento.setGordurasSaturadas(Double.parseDouble(txtGordurasSaturadas.getText().replace(',', '.')));
+		alimento.setGordurasTrans(Double.parseDouble(txtGordurasTrans.getText().replace(',', '.')));
 
 		return alimento;
 	}
@@ -658,6 +705,7 @@ public class AdministrativoViewer implements ActionListener {
 		cmbPorcao.setSelectedItem(alimento.getPorcao());
 
 		txtValorEnergetico.setText(String.format("%.2f", alimento.getValorEnergetico()));
+		txtValorPorcao.setText(String.format("%.2f", alimento.getValorPorcao()));
 		txtProteinas.setText(String.format("%.2f", alimento.getProteinas()));
 		txtFibras.setText(String.format("%.2f", alimento.getFibras()));
 		txtCarboidratos.setText(String.format("%.2f", alimento.getCarboidrato()));

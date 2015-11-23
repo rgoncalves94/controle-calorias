@@ -15,7 +15,9 @@ import javax.swing.table.TableModel;
 
 import controle.calorias.model.Alimento;
 import controle.calorias.model.AtividadeFisica;
+import controle.calorias.model.Porcao;
 import controle.calorias.view.AdministrativoViewer;
+import controle.calorias.view.PorcaoController;
 import resource.dao.AlimentoDAO;
 import resource.dao.AlimentoDAOImpl;
 
@@ -23,10 +25,15 @@ public class AlimentoController implements TableModel, ListSelectionListener, Ac
 
 	private AdministrativoViewer formulario = null;
 	private List<Alimento> listaAlimentos = null;
+	private List<Porcao> listaPorcao = null;
 
 	public AlimentoController(AdministrativoViewer form) {
 		AlimentoDAO dao = new AlimentoDAOImpl();
 		listaAlimentos = dao.selectAll();
+
+		PorcaoController pc = new PorcaoController();
+
+		listaPorcao = pc.selecionaTodos();
 
 		this.formulario = form;
 	}
@@ -99,7 +106,13 @@ public class AlimentoController implements TableModel, ListSelectionListener, Ac
 		case 2:
 			return alimento.getValorEnergetico();
 		case 3:
-			return alimento.getPorcao().getId();
+			for (Porcao p : listaPorcao) {
+				if (alimento.getPorcao().getId() == p.getId()) {
+					alimento.setPorcao(p);
+					break;
+				}
+			}
+			return alimento.getPorcao().toString();
 		case 4:
 			return alimento.getValorPorcao();
 		case 5:
@@ -216,30 +229,29 @@ public class AlimentoController implements TableModel, ListSelectionListener, Ac
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 
-		if (cmd.equals("Salvar")) {
-			if (formulario.validarPreenchimento()) {
+		if (cmd.equals("SalvarAlimento")) {
+			if (formulario.validarPreenchimentoAlimento()) {
 				Alimento alimento = formulario.viewAlimentoToControl();
-
 				if (alimento.getId() == 0) {
 					this.adicionar(alimento);
 				} else {
 					this.alterar(alimento);
 				}
 			}
-		} else if (cmd.equals("Excluir")) {
-			int txtId = formulario.viewToControl().getId();
+		} else if (cmd.equals("ExcluirAlimento")) {
+			long txtId = formulario.viewAlimentoToControl().getId();
 			if (txtId == 0) {
 				JOptionPane.showMessageDialog(null, "Favor selecione um registro!");
 			} else {
 				this.deletar(txtId);
 				formulario.limparCamposAlimento();
 			}
-		} else if (cmd.equals("Limpar Campos")) {
+		} else if (cmd.equals("Limpar Campos Alimento")) {
 			formulario.limparCamposAlimento();
 		}
 
-		atualizarTabela();
-		formulario.limparCampos();
+		this.atualizarTabela();
+		formulario.limparCamposAlimento();
 
 	}
 
@@ -279,7 +291,7 @@ public class AlimentoController implements TableModel, ListSelectionListener, Ac
 	}
 
 	public int getSelectedLine() {
-		int linha = formulario.getTabela().getSelectionModel().getMinSelectionIndex();
+		int linha = formulario.getTabelaAlimento().getSelectionModel().getMinSelectionIndex();
 		return linha;
 	}
 

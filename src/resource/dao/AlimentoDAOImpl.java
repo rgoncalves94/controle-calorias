@@ -22,7 +22,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 	public long insert(Alimento alimento) {
 		long id = 0;
 		try {
-			String query = "INSERT INTO alimento (nome, valor_energetico, porcao, valor_porcao, proteinas, "
+			String query = "INSERT INTO alimento (nome, valor_energetico, id_porcao, valor_porcao, proteinas, "
 					+ "fibras, carboidratos, sodio, gorduras_totais, gorduras_saturadas, gorduras_trans) "
 					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 
@@ -57,7 +57,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 	public boolean update(Alimento alimento) {
 		boolean status = false;
 		try {
-			String query = "UPDATE alimento SET nome=?, valor_energetico=?, porcao=?, valor_porcao=?, proteinas=?, fibras=?, carboidratos=?, sodio=?, gorduras_totais=?, gorduras_saturadas=?, gorduras_trans=? WHERE  id=?;";
+			String query = "UPDATE alimento SET nome=?, valor_energetico=?, id_porcao=?, valor_porcao=?, proteinas=?, fibras=?, carboidratos=?, sodio=?, gorduras_totais=?, gorduras_saturadas=?, gorduras_trans=? WHERE  id=?;";
 
 			PreparedStatement stmt = conn.prepareStatement(query);
 
@@ -73,7 +73,11 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 			stmt.setDouble(10, alimento.getGordurasSaturadas());
 			stmt.setDouble(11, alimento.getGordurasTrans());
 
-			status = (stmt.executeUpdate() == 1) ? true : false;
+			stmt.setLong(12, alimento.getId());
+
+			int rowsAffected = stmt.executeUpdate();
+
+			status = (rowsAffected == 1) ? true : false;
 
 		} catch (SQLException e) {
 			new AlimentoDAOException("Erro ao atualizar");
@@ -116,6 +120,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 			alimento.setId(resultados.getLong("id"));
 			alimento.setNome(resultados.getString("nome"));
 			alimento.setValorEnergetico(resultados.getDouble("valor_energetico"));
+			alimento.setPorcao(new Porcao());
 			alimento.getPorcao().setId(resultados.getInt("id_porcao"));
 			alimento.setValorPorcao(resultados.getDouble("valor_porcao"));
 			alimento.setProteinas(resultados.getDouble("proteinas"));
@@ -153,6 +158,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 				alimento.setId(resultados.getLong("id"));
 				alimento.setNome(resultados.getString("nome"));
 				alimento.setValorEnergetico(resultados.getDouble("valor_energetico"));
+				alimento.setPorcao(new Porcao());
 				alimento.getPorcao().setId(resultados.getInt("id_porcao"));
 				alimento.setValorPorcao(resultados.getDouble("valor_porcao"));
 				alimento.setProteinas(resultados.getDouble("proteinas"));
