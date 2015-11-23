@@ -1,5 +1,7 @@
 package controle.calorias.control;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +11,9 @@ import javax.swing.table.TableModel;
 import controle.calorias.model.RegistroAtividadeFisica;
 import resource.dao.RegistroAtividadeFisicaDAO;
 
-public class GastoCaloricoController implements TableModel{
+public class RegistroAtividadeFisicaController implements TableModel, ActionListener{
 	private List<RegistroAtividadeFisica> lista;
-//	private RegistroAtividadeFisicaDAO registroAtividadeFisicaDAO;
+	private RegistroAtividadeFisicaDAO registroAtividadeFisicaDAO;
 	
 	@Override
 	public void addTableModelListener(TableModelListener arg0) {
@@ -70,4 +72,8 @@ public class GastoCaloricoController implements TableModel{
 		
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
 }

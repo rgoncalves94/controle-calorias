@@ -28,4 +28,9 @@ public class AtividadeFisica {
 	public void setGastoCalorico(double gastoCalorico) {
 		this.gastoCalorico = gastoCalorico;
 	}
+	
+	@Override
+	public String toString() {
+		return getNome();
+	}
 }
