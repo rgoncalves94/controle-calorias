@@ -10,6 +10,8 @@ import java.util.List;
 
 import controle.calorias.model.Alimento;
 import controle.calorias.model.Refeicao;
+import controle.calorias.model.TipoRefeicao;
+import controle.calorias.model.Usuario;
 
 public class RefeicaoDAOImpl implements RefeicaoDAO {
 
@@ -97,6 +99,11 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 			refeicao = new Refeicao();
 
 			refeicao.setId(resultados.getLong("id"));
+			refeicao.setData(resultados.getDate("data_refeicao"));
+			refeicao.setUsuario(new Usuario());
+			refeicao.getUsuario().setId(resultados.getInt("id_usuario"));
+			refeicao.setTipoRefeicao(new TipoRefeicao());
+			refeicao.getTipoRefeicao().setId(resultados.getInt("id_tipo_refeicao"));
 
 		} catch (SQLException e) {
 			new RefeicaoDAOException("Erro ao Selecionar por ID");
@@ -123,6 +130,11 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 				Refeicao refeicao = new Refeicao();
 
 				refeicao.setId(resultados.getLong("id"));
+				refeicao.setData(resultados.getDate("data_refeicao"));
+				refeicao.setUsuario(new Usuario());
+				refeicao.getUsuario().setId(resultados.getInt("id_usuario"));
+				refeicao.setTipoRefeicao(new TipoRefeicao());
+				refeicao.getTipoRefeicao().setId(resultados.getInt("id_tipo_refeicao"));
 
 				refeicoes.add(refeicao);
 
@@ -137,12 +149,11 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 	public List<Refeicao> selectByDateAndUsuario(Date data, long usuario) {
 		List<Refeicao> refeicoes = null;
 		try {
-			String query = "SELECT * FROM refeicao WHERE id_usuario = ? AND data_refeicao >= ? AND data_refeicao <= ?";
+			String query = "SELECT * FROM refeicao WHERE id_usuario = ? AND DATE(data_refeicao) = DATE(?);";
 			PreparedStatement stmt = conn.prepareStatement(query);
 
 			stmt.setLong(1, usuario);
 			stmt.setDate(2, new java.sql.Date(data.getTime()));
-			stmt.setDate(3, new java.sql.Date(data.getTime()));
 
 			ResultSet resultados = stmt.executeQuery();
 
@@ -153,6 +164,11 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 				Refeicao refeicao = new Refeicao();
 
 				refeicao.setId(resultados.getLong("id"));
+				refeicao.setData(resultados.getDate("data_refeicao"));
+				refeicao.setUsuario(new Usuario());
+				refeicao.getUsuario().setId(resultados.getInt("id_usuario"));
+				refeicao.setTipoRefeicao(new TipoRefeicao());
+				refeicao.getTipoRefeicao().setId(resultados.getInt("id_tipo_refeicao"));
 
 				refeicoes.add(refeicao);
 

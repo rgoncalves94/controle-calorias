@@ -4,6 +4,6 @@ import javax.swing.JFrame;
 
 public class Teste {
 	public static void main(String[] args) {
-		JFrame frame = new AdministrativoViewer().getFrame();
+		// JFrame frame = new AdministrativoViewer().getFrame();
 	}
 }

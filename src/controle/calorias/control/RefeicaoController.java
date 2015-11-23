@@ -1,28 +1,48 @@
 package controle.calorias.control;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 import controle.calorias.model.Refeicao;
 import resource.dao.RefeicaoDAO;
+import resource.dao.RefeicaoDAOImpl;
 
-public class RefeicaoController implements TableModel {
+public class RefeicaoController implements TableModel, ListSelectionListener {
 
-	private List<Refeicao> refeicoes = new ArrayList<Refeicao>();
+	private List<Refeicao> listaRefeicoes = new ArrayList<Refeicao>();
+
+	private Date data;
+	private long idUsuario;
 
 	public RefeicaoController() {
-		RefeicaoDAO dao = new RefeicaoDAO();
+
+		RefeicaoDAO dao = new RefeicaoDAOImpl();
+
+		this.data = new Date();
+
+		this.idUsuario = 9;
+
+		listaRefeicoes = dao.selectByDateAndUsuario(data, 9);
+
+		System.out.println(listaRefeicoes.size());
+
 	}
 
 	public List<Refeicao> getRefeicoes() {
-		return refeicoes;
+		return listaRefeicoes;
 	}
 
 	public void setRefeicoes(List<Refeicao> refeicoes) {
-		this.refeicoes = refeicoes;
+		this.listaRefeicoes = refeicoes;
 	}
 
 	/**
@@ -30,29 +50,55 @@ public class RefeicaoController implements TableModel {
 	 * 
 	 */
 
-	public long adicionar(Refeicao refeicao) {
-		return 1;
+	public String adicionar(Refeicao refeicao) {
+		RefeicaoDAO dao = new RefeicaoDAOImpl();
+
+		long id = dao.insert(refeicao);
+
+		this.revalidateRegisters();
+
+		return (id > 0) ? "Registro excluído com sucesso." : "Não foi possível realizar a alteração do item.";
 	}
 
 	public String atualizar(Refeicao refeicao) {
-		return null;
+		RefeicaoDAO dao = new RefeicaoDAOImpl();
+
+		if (refeicao.getId() <= 0)
+			return "Não foi possível realizar a alteração do item.";
+
+		boolean result = dao.update(refeicao);
+
+		this.revalidateRegisters();
+
+		return (result) ? "Registro excluído com sucesso." : "Não foi possível realizar a alteração do item.";
 	}
 
-	public String deletar(Refeicao refeicao) {
-		return null;
+	public String deletar(long id) {
+		RefeicaoDAO dao = new RefeicaoDAOImpl();
+
+		boolean result = dao.delete(id);
+
+		this.revalidateRegisters();
+
+		return (result) ? "Registro excluído com sucesso." : "Não foi possível realizar a exclusão do item";
 	}
 
-	public Refeicao selecionarPorId(Refeicao refeicao) {
+	public Refeicao selecionarPorId(long id) {
+		RefeicaoDAO dao = new RefeicaoDAOImpl();
 
-		return null;
+		return dao.selectById(id);
 	}
 
-	public List<Refeicao> selecionarPorNome(Refeicao refeicao) {
-		return null;
+	public List<Refeicao> selecionarPorUsuario(long id) {
+		RefeicaoDAO dao = new RefeicaoDAOImpl();
+
+		return dao.selectByUsuario(id);
 	}
 
-	public List<Refeicao> selecionarTodos() {
-		return null;
+	public List<Refeicao> selecionarTodos(Date data, long user) {
+		RefeicaoDAO dao = new RefeicaoDAOImpl();
+
+		return dao.selectByDateAndUsuario(data, user);
 	}
 
 	/**
@@ -68,32 +114,61 @@ public class RefeicaoController implements TableModel {
 
 	@Override
 	public Class<?> getColumnClass(int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		switch (columnIndex) {
+		case 0:
+			return Long.class;
+		case 1:
+			return String.class;
+		case 2:
+			return String.class;
+		case 3:
+			return String.class;
+		}
+		return String.class;
 	}
 
 	@Override
 	public int getColumnCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 4;
 	}
 
 	@Override
 	public String getColumnName(int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		switch (columnIndex) {
+		case 0:
+			return "Id";
+		case 1:
+			return "Data";
+		case 2:
+			return "Usuário";
+		case 3:
+			return "Tipo Refeição";
+		}
+
+		return "";
 	}
 
 	@Override
 	public int getRowCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.listaRefeicoes.size();
 	}
 
 	@Override
 	public Object getValueAt(int rowIndex, int columnIndex) {
-		// TODO Auto-generated method stub
-		return null;
+		Refeicao refeicao = listaRefeicoes.get(rowIndex);
+		switch (columnIndex) {
+		case 0:
+			return refeicao.getId();
+		case 1:
+			return refeicao.getData().toString();
+		case 2:
+			return refeicao.getUsuario().getNome();
+		case 3:
+			return refeicao.getTipoRefeicao().toString();
+		default:
+			throw new ArrayIndexOutOfBoundsException("Erro no total to valor da table Refeicao");
+		}
+
 	}
 
 	@Override
@@ -112,5 +187,17 @@ public class RefeicaoController implements TableModel {
 	public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void revalidateRegisters() {
+		RefeicaoDAO dao = new RefeicaoDAOImpl();
+
+		listaRefeicoes = dao.selectByDateAndUsuario(data, idUsuario);
 	}
 }

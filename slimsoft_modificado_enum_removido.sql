@@ -11,13 +11,11 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Copiando estrutura do banco de dados para slimsoft
-DROP DATABASE IF EXISTS `slimsoft`;
 CREATE DATABASE IF NOT EXISTS `slimsoft` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `slimsoft`;
 
 
 -- Copiando estrutura para tabela slimsoft.alimento
-DROP TABLE IF EXISTS `alimento`;
 CREATE TABLE IF NOT EXISTS `alimento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
@@ -36,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `alimento` (
   CONSTRAINT `porcao_id` FOREIGN KEY (`id_porcao`) REFERENCES `porcao` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- Copiando dados para a tabela slimsoft.alimento: ~4 rows (aproximadamente)
+-- Copiando dados para a tabela slimsoft.alimento: ~2 rows (aproximadamente)
 DELETE FROM `alimento`;
 /*!40000 ALTER TABLE `alimento` DISABLE KEYS */;
 INSERT INTO `alimento` (`id`, `nome`, `valor_energetico`, `id_porcao`, `valor_porcao`, `proteinas`, `fibras`, `carboidratos`, `sodio`, `gorduras_totais`, `gorduras_saturadas`, `gorduras_trans`) VALUES
@@ -46,7 +44,6 @@ INSERT INTO `alimento` (`id`, `nome`, `valor_energetico`, `id_porcao`, `valor_po
 
 
 -- Copiando estrutura para tabela slimsoft.atividade_fisica
-DROP TABLE IF EXISTS `atividade_fisica`;
 CREATE TABLE IF NOT EXISTS `atividade_fisica` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
@@ -61,7 +58,6 @@ DELETE FROM `atividade_fisica`;
 
 
 -- Copiando estrutura para tabela slimsoft.historico
-DROP TABLE IF EXISTS `historico`;
 CREATE TABLE IF NOT EXISTS `historico` (
   `id_usuario` int(11) NOT NULL,
   `data_historico` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -82,7 +78,6 @@ DELETE FROM `historico`;
 
 
 -- Copiando estrutura para tabela slimsoft.intensidade
-DROP TABLE IF EXISTS `intensidade`;
 CREATE TABLE IF NOT EXISTS `intensidade` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -101,7 +96,6 @@ INSERT INTO `intensidade` (`id`, `nome`) VALUES
 
 
 -- Copiando estrutura para tabela slimsoft.item_refeicao
-DROP TABLE IF EXISTS `item_refeicao`;
 CREATE TABLE IF NOT EXISTS `item_refeicao` (
   `id_refeicao` int(11) NOT NULL,
   `id_alimento` int(11) NOT NULL,
@@ -119,7 +113,6 @@ DELETE FROM `item_refeicao`;
 
 
 -- Copiando estrutura para tabela slimsoft.meta
-DROP TABLE IF EXISTS `meta`;
 CREATE TABLE IF NOT EXISTS `meta` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -137,7 +130,6 @@ INSERT INTO `meta` (`id`, `nome`) VALUES
 
 
 -- Copiando estrutura para tabela slimsoft.nivel_atividade_fisica
-DROP TABLE IF EXISTS `nivel_atividade_fisica`;
 CREATE TABLE IF NOT EXISTS `nivel_atividade_fisica` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -157,7 +149,6 @@ INSERT INTO `nivel_atividade_fisica` (`id`, `nome`) VALUES
 
 
 -- Copiando estrutura para tabela slimsoft.porcao
-DROP TABLE IF EXISTS `porcao`;
 CREATE TABLE IF NOT EXISTS `porcao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `desc` varchar(50) DEFAULT NULL,
@@ -175,7 +166,6 @@ INSERT INTO `porcao` (`id`, `desc`) VALUES
 
 
 -- Copiando estrutura para tabela slimsoft.refeicao
-DROP TABLE IF EXISTS `refeicao`;
 CREATE TABLE IF NOT EXISTS `refeicao` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `id_usuario` int(11) NOT NULL,
@@ -192,12 +182,13 @@ CREATE TABLE IF NOT EXISTS `refeicao` (
 DELETE FROM `refeicao`;
 /*!40000 ALTER TABLE `refeicao` DISABLE KEYS */;
 INSERT INTO `refeicao` (`id`, `id_usuario`, `data_refeicao`, `id_tipo_refeicao`) VALUES
-	(1, 9, '2015-11-24 13:10:27', 3);
+	(1, 9, '2015-11-23 13:10:27', 3),
+	(3, 9, '2015-11-23 13:10:27', 6),
+	(4, 9, '2015-11-23 13:10:27', 1);
 /*!40000 ALTER TABLE `refeicao` ENABLE KEYS */;
 
 
 -- Copiando estrutura para tabela slimsoft.registro_atividade
-DROP TABLE IF EXISTS `registro_atividade`;
 CREATE TABLE IF NOT EXISTS `registro_atividade` (
   `id_usuario` int(11) NOT NULL,
   `id_atividade` int(11) NOT NULL,
@@ -216,7 +207,6 @@ DELETE FROM `registro_atividade`;
 
 
 -- Copiando estrutura para tabela slimsoft.tipo_refeicao
-DROP TABLE IF EXISTS `tipo_refeicao`;
 CREATE TABLE IF NOT EXISTS `tipo_refeicao` (
   `id` tinyint(4) NOT NULL AUTO_INCREMENT,
   `nome` varchar(100) NOT NULL,
@@ -237,7 +227,6 @@ INSERT INTO `tipo_refeicao` (`id`, `nome`) VALUES
 
 
 -- Copiando estrutura para tabela slimsoft.usuario
-DROP TABLE IF EXISTS `usuario`;
 CREATE TABLE IF NOT EXISTS `usuario` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,

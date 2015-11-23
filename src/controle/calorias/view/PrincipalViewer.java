@@ -14,11 +14,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.SwingConstants;
 
+import controle.calorias.control.RefeicaoController;
 import resource.events.MouseEvents;
 
-public class PrincipalViewer implements ActionListener{
+public class PrincipalViewer implements ActionListener {
 	private JFrame frame;
 	private JPanel contentPane;
 	private JPanel pnlCabecalho;
@@ -47,7 +50,12 @@ public class PrincipalViewer implements ActionListener{
 	private String totalConsumo = "+ 2000.0 kcal";
 	private String totalGasto = "- 0.0 kcal";
 
+	private RefeicaoController ctrlRefeicao;
+	private JScrollPane scrollRefeicoes;
+	private JTable tableRefeicoes;
+
 	public PrincipalViewer() {
+		init();
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 		contentPane.add(getPnlCabecalho());
@@ -65,14 +73,19 @@ public class PrincipalViewer implements ActionListener{
 		frame.setLocationRelativeTo(null);
 		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setContentPane(contentPane);
+
 	}
-	
-	private JPanel getPnlCabecalho() {	
+
+	public void init() {
+		ctrlRefeicao = new RefeicaoController();
+	}
+
+	private JPanel getPnlCabecalho() {
 		pnlCabecalho = new JPanel();
-		pnlCabecalho.setLayout(null);	
+		pnlCabecalho.setLayout(null);
 		pnlCabecalho.setBounds(0, 0, 1024, 30);
 		pnlCabecalho.setBackground(Color.DARK_GRAY);
-		
+
 		btnAcessoAdministrativo = new JButton(" Acesso Administrativo");
 		btnAcessoAdministrativo.setActionCommand("AcessoAdm");
 		btnAcessoAdministrativo.addActionListener(this);
@@ -81,18 +94,19 @@ public class PrincipalViewer implements ActionListener{
 		btnAcessoAdministrativo.setBackground(Color.DARK_GRAY);
 		btnAcessoAdministrativo.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		btnAcessoAdministrativo.setBorder(BorderFactory.createEmptyBorder());
-		btnAcessoAdministrativo.setIcon(new ImageIcon(PrincipalViewer.class.getResource("/resource/icons/config2.png")));
+		btnAcessoAdministrativo
+				.setIcon(new ImageIcon(PrincipalViewer.class.getResource("/resource/icons/config2.png")));
 		pnlCabecalho.add(btnAcessoAdministrativo);
-		
+
 		return pnlCabecalho;
 	}
 
 	private JPanel getPnlGeral() {
 		pnlGeral = new JPanel();
 		pnlGeral.setBounds(0, 30, 1024, 302);
-//		pnlGeral.setBackground(Color.BLUE);
+		// pnlGeral.setBackground(Color.BLUE);
 		pnlGeral.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY));
-		
+
 		return pnlGeral;
 	}
 
@@ -107,13 +121,13 @@ public class PrincipalViewer implements ActionListener{
 		lblAlimentosConsumidos.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAlimentosConsumidos.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlCalendario.add(lblAlimentosConsumidos);
-		
+
 		JLabel lblAtividadesRealizadas = new JLabel("Atividades Realizadas");
 		lblAtividadesRealizadas.setBounds(592, 0, 432, 20);
 		lblAtividadesRealizadas.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblAtividadesRealizadas.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlCalendario.add(lblAtividadesRealizadas);
-		
+
 		lblTotalConsumo = new JLabel(totalConsumo);
 		lblTotalConsumo.setBounds(0, 20, 432, 20);
 		lblTotalConsumo.setFont(new Font("Tahoma", Font.ITALIC, 11));
@@ -132,7 +146,7 @@ public class PrincipalViewer implements ActionListener{
 		lblData.setFont(new Font("Tahoma", Font.BOLD, 12));
 		lblData.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlCalendario.add(lblData);
-		
+
 		diaAnterior = new JButton("");
 		diaAnterior.setBounds(432, 0, 40, 40);
 		diaAnterior.setBackground(null);
@@ -142,7 +156,7 @@ public class PrincipalViewer implements ActionListener{
 		diaAnterior.setActionCommand("DiaAnterior");
 		diaAnterior.addActionListener(this);
 		pnlCalendario.add(diaAnterior);
-		
+
 		diaPosterior = new JButton("");
 		diaPosterior.setBounds(552, 0, 40, 40);
 		diaPosterior.setBackground(null);
@@ -152,30 +166,53 @@ public class PrincipalViewer implements ActionListener{
 		diaPosterior.setActionCommand("DiaPosterior");
 		diaPosterior.addActionListener(this);
 		pnlCalendario.add(diaPosterior);
-		
+
 		return pnlCalendario;
 	}
-	
+
 	private JPanel getPnlRefeicao() {
 		pnlRefeicao = new JPanel();
 		pnlRefeicao.setBounds(0, 372, 432, 300);
-//		pnlRefeicao.setBackground(Color.GREEN);
+		// pnlRefeicao.setBackground(Color.GREEN);
 		pnlRefeicao.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY));
-		
+
+		tableRefeicoes = new JTable(ctrlRefeicao);
+		tableRefeicoes.setBackground(Color.WHITE);
+		tableRefeicoes.getTableHeader().setBackground(Color.decode("#5F9EA0"));
+		tableRefeicoes.getTableHeader().setForeground(Color.WHITE);
+		tableRefeicoes.getColumnModel().getColumn(0).setPreferredWidth(100);
+		tableRefeicoes.getColumnModel().getColumn(1).setPreferredWidth(100);
+		tableRefeicoes.getColumnModel().getColumn(2).setPreferredWidth(100);
+		tableRefeicoes.getColumnModel().getColumn(3).setPreferredWidth(100);
+		tableRefeicoes.getColumnModel().getColumn(0).setResizable(false);
+		tableRefeicoes.getColumnModel().getColumn(1).setResizable(false);
+		tableRefeicoes.getColumnModel().getColumn(2).setResizable(false);
+		tableRefeicoes.getColumnModel().getColumn(3).setResizable(false);
+		tableRefeicoes.getSelectionModel().addListSelectionListener(ctrlRefeicao);
+
+		scrollRefeicoes = new JScrollPane();
+		scrollRefeicoes.setAutoscrolls(true);
+		scrollRefeicoes.setBounds(0, 372, 432, 300);
+		scrollRefeicoes.setBorder(BorderFactory.createEmptyBorder());
+
+		scrollRefeicoes.setViewportView(tableRefeicoes);
+
+		pnlRefeicao.add(scrollRefeicoes);
+
 		return pnlRefeicao;
 	}
-	
+
 	private JPanel getPnlBotoes() {
 		Color colorOne = Color.DARK_GRAY;
 		Color colorTwo = Color.decode("#66CDAA");
 		MouseEvents mouseEvents = new MouseEvents(colorOne, colorTwo);
-		
+
 		pnlBotoes = new JPanel();
 		pnlBotoes.setLayout(null);
 		pnlBotoes.setBounds(432, 372, 160, 300);
 		pnlBotoes.setBackground(Color.decode("#5F9EA0"));
 		pnlBotoes.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 1, Color.LIGHT_GRAY));
-		
+
 		btnAtualizarConsumo = new JButton("<html><center>Atualizar<br>Consumo Calórico</center></html>");
 		btnAtualizarConsumo.setBounds(1, 0, 158, 60);
 		btnAtualizarConsumo.addMouseListener(mouseEvents);
@@ -184,7 +221,7 @@ public class PrincipalViewer implements ActionListener{
 		btnAtualizarConsumo.setBackground(colorOne);
 		btnAtualizarConsumo.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.LIGHT_GRAY));
 		pnlBotoes.add(btnAtualizarConsumo);
-		
+
 		btnAtualizarGasto = new JButton("<html><center>Atualizar<br>Gasto Calórico</center></html>");
 		btnAtualizarGasto.setBounds(1, 59, 158, 60);
 		btnAtualizarGasto.addMouseListener(mouseEvents);
@@ -193,7 +230,7 @@ public class PrincipalViewer implements ActionListener{
 		btnAtualizarGasto.setBackground(colorOne);
 		btnAtualizarGasto.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.LIGHT_GRAY));
 		pnlBotoes.add(btnAtualizarGasto);
-		
+
 		btnGerarRelatorio = new JButton("Gerar Relatório");
 		btnGerarRelatorio.setBounds(1, 118, 158, 60);
 		btnGerarRelatorio.addMouseListener(mouseEvents);
@@ -202,40 +239,40 @@ public class PrincipalViewer implements ActionListener{
 		btnGerarRelatorio.setBackground(colorOne);
 		btnGerarRelatorio.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.LIGHT_GRAY));
 		pnlBotoes.add(btnGerarRelatorio);
-		
+
 		return pnlBotoes;
 	}
-	
+
 	private JPanel getPnlExercicio() {
 		pnlExercicio = new JPanel();
 		pnlExercicio.setBounds(592, 372, 432, 300);
-//		pnlExercicio.setBackground(Color.ORANGE);
+		// pnlExercicio.setBackground(Color.ORANGE);
 		pnlExercicio.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY));
-		
+
 		return pnlExercicio;
 	}
-	
+
 	private JPanel getPnlRodape() {
 		pnlRodape = new JPanel();
 		pnlRodape.setBounds(0, 672, 1024, 28);
 		pnlRodape.setBackground(Color.DARK_GRAY);
-		
+
 		JLabel lblPowered = new JLabel("powered by R2F Developers");
 		lblPowered.setBounds(824, 5, 200, 20);
 		lblPowered.setForeground(Color.WHITE);
 		lblPowered.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		lblPowered.setFont(new Font("Dialog", Font.ITALIC, 12));
 		pnlRodape.add(lblPowered);
-		
+
 		return pnlRodape;
 	}
-	
-	public LocalDate getDataDoLblData(){
+
+	public LocalDate getDataDoLblData() {
 		String[] v = lblData.getText().split("/");
 		int dia = Integer.parseInt(v[0]);
 		int mes = Integer.parseInt(v[1]);
 		int ano = Integer.parseInt(v[2]);
-		
+
 		LocalDate d = LocalDate.of(ano, mes, dia);
 		return d;
 	}
@@ -243,7 +280,7 @@ public class PrincipalViewer implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
-		
+
 		if (cmd.equals("AcessoAdm")) {
 			new AdministrativoViewer();
 			this.frame.dispose();
@@ -257,7 +294,7 @@ public class PrincipalViewer implements ActionListener{
 			d = d.plusDays(1);
 			data = d.format(formatador);
 			if (hoje.isAfter(d) || hoje.equals(d)) {
-				lblData.setText(data);					
+				lblData.setText(data);
 			}
 		}
 	}

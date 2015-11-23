@@ -20,4 +20,10 @@ public class TipoRefeicao {
 		this.descricao = descricao;
 	}
 
+	@Override
+	public String toString() {
+
+		return id + " - " + descricao;
+	}
+
 }
