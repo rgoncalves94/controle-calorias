@@ -1,4 +1,4 @@
-package controle.calorias.view;
+package controle.calorias.control;
 
 import java.util.ArrayList;
 import java.util.List;

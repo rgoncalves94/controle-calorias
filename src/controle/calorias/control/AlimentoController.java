@@ -17,7 +17,6 @@ import controle.calorias.model.Alimento;
 import controle.calorias.model.AtividadeFisica;
 import controle.calorias.model.Porcao;
 import controle.calorias.view.AdministrativoViewer;
-import controle.calorias.view.PorcaoController;
 import resource.dao.AlimentoDAO;
 import resource.dao.AlimentoDAOImpl;
 

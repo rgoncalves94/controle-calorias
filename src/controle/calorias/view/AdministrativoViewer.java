@@ -24,6 +24,7 @@ import javax.swing.ImageIcon;
 
 import controle.calorias.control.AlimentoController;
 import controle.calorias.control.AtividadeFisicaController;
+import controle.calorias.control.PorcaoController;
 import controle.calorias.model.Alimento;
 import controle.calorias.model.AtividadeFisica;
 import controle.calorias.model.Porcao;

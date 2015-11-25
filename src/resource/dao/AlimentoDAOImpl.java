@@ -182,7 +182,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 	public List<Alimento> selectAll() {
 		List<Alimento> alimentos = null;
 		try {
-			String query = "SELECT * FROM alimento;";
+			String query = "SELECT a.*, p.desc FROM alimento a INNER JOIN porcao p ON a.id_porcao = p.id;";
 			PreparedStatement stmt = conn.prepareStatement(query);
 
 			ResultSet resultados = stmt.executeQuery();
@@ -198,6 +198,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 				alimento.setValorEnergetico(resultados.getDouble("valor_energetico"));
 				alimento.setPorcao(new Porcao());
 				alimento.getPorcao().setId(resultados.getInt("id_porcao"));
+				alimento.getPorcao().setTexto(resultados.getString("desc"));
 				alimento.setValorPorcao(resultados.getDouble("valor_porcao"));
 				alimento.setProteinas(resultados.getDouble("proteinas"));
 				alimento.setFibras(resultados.getDouble("fibras"));

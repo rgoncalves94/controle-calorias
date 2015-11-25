@@ -1,5 +1,9 @@
 package controle.calorias.model;
 
+/**
+ * @author Samsumg
+ *
+ */
 public class Alimento {
 
 	private long id;
@@ -115,4 +119,8 @@ public class Alimento {
 		this.gordurasTrans = gordurasTrans;
 	}
 
+	@Override
+	public String toString() {
+		return this.nome + "  " + valorEnergetico + " cal - por " + valorPorcao + "(" + porcao.getTexto() + ")";
+	}
 }

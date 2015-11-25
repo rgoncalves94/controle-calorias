@@ -3,6 +3,9 @@ package controle.calorias.view;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+
+import controle.calorias.control.AlimentoComboModel;
+
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.JSpinner;
@@ -10,7 +13,7 @@ import javax.swing.JButton;
 
 public class RefeicaoView {
 
-	JFrame frame = new JFrame("Controle de Calorias");
+	JFrame frame = new JFrame("SlimSoft");
 	private JLabel logo;
 	private JScrollPane scrollPane;
 	private JTable table;
@@ -29,11 +32,14 @@ public class RefeicaoView {
 	private JButton btnFinalizar;
 	private JButton btnAdicionar;
 
+	private AlimentoComboModel ctrlAlimentoComboModel;
+
 	public static void main(String[] args) {
 		new RefeicaoView();
 	}
 
 	public RefeicaoView() {
+		ctrlAlimentoComboModel = new AlimentoComboModel();
 		initialize();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
@@ -70,6 +76,7 @@ public class RefeicaoView {
 
 		cmbAlimento = new JComboBox();
 		cmbAlimento.setBounds(21, 222, 243, 31);
+		cmbAlimento.setModel(ctrlAlimentoComboModel);
 		frame.getContentPane().add(cmbAlimento);
 
 		lblQtde = new JLabel("Quantidade");
