@@ -6,7 +6,7 @@ import javax.swing.event.ListDataListener;
 public class TipoRefeicaoComboModel implements ComboBoxModel {
 
 	public TipoRefeicaoComboModel() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	@Override
