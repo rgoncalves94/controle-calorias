@@ -1,4 +1,4 @@
-package controle.calorias.control;
+package resource.dao;
 
 import java.util.List;
 

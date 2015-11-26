@@ -9,6 +9,7 @@ import javax.swing.event.ListDataListener;
 
 import controle.calorias.model.Porcao;
 import resource.dao.PorcaoDAO;
+import resource.dao.PorcaoDAOException;
 import resource.dao.PorcaoDAOImpl;
 
 public class PorcaoController implements ComboBoxModel<Porcao> {
@@ -24,7 +25,16 @@ public class PorcaoController implements ComboBoxModel<Porcao> {
 
 	public List<Porcao> selecionaTodos() {
 		PorcaoDAO dao = new PorcaoDAOImpl();
-		return dao.selectAll();
+
+		List<Porcao> porcoes = null;
+		try {
+			porcoes = dao.selectAll();
+		} catch (PorcaoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return porcoes;
 	}
 
 	@Override
@@ -56,8 +66,5 @@ public class PorcaoController implements ComboBoxModel<Porcao> {
 	public void setSelectedItem(Object anItem) {
 		porcaoSelecionada = (Porcao) anItem;
 	}
-	
-	
-	
 
 }

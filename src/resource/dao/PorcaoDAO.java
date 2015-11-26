@@ -6,5 +6,5 @@ import controle.calorias.model.Porcao;
 
 public interface PorcaoDAO {
 
-	public List<Porcao> selectAll();
+	public List<Porcao> selectAll() throws PorcaoDAOException;
 }

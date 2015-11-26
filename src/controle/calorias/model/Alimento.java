@@ -19,6 +19,8 @@ public class Alimento {
 	private double gordurasSaturadas;
 	private double gordurasTrans;
 
+	private int quantidade;
+
 	public Alimento() {
 
 	}
@@ -123,4 +125,13 @@ public class Alimento {
 	public String toString() {
 		return this.nome + "  " + valorEnergetico + " cal - por " + valorPorcao + "(" + porcao.getTexto() + ")";
 	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(int quantidade) {
+		this.quantidade = quantidade;
+	}
+
 }

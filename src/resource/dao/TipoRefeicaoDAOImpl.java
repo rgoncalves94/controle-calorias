@@ -1,4 +1,4 @@
-package controle.calorias.control;
+package resource.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import controle.calorias.model.TipoRefeicao;
-import resource.dao.ResourceManager;
 
 public class TipoRefeicaoDAOImpl implements TipoRefeicaoDAO {
 

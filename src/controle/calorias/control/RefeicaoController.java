@@ -12,8 +12,10 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
+import controle.calorias.model.Alimento;
 import controle.calorias.model.Refeicao;
 import resource.dao.RefeicaoDAO;
+import resource.dao.RefeicaoDAOException;
 import resource.dao.RefeicaoDAOImpl;
 
 public class RefeicaoController implements TableModel, ListSelectionListener {
@@ -31,9 +33,12 @@ public class RefeicaoController implements TableModel, ListSelectionListener {
 
 		this.idUsuario = 9;
 
-		listaRefeicoes = dao.selectByDateAndUsuario(data, 9);
-
-		System.out.println(listaRefeicoes.size());
+		try {
+			listaRefeicoes = dao.selectByDateAndUsuario(data, 9);
+		} catch (RefeicaoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -53,7 +58,22 @@ public class RefeicaoController implements TableModel, ListSelectionListener {
 	public String adicionar(Refeicao refeicao) {
 		RefeicaoDAO dao = new RefeicaoDAOImpl();
 
-		long id = dao.insert(refeicao);
+		long id = 0;
+		try {
+			id = dao.insert(refeicao);
+		} catch (RefeicaoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		if (refeicao.getListAlimentos().size() > 0) {
+			ItemRefeicaoController ctrl = new ItemRefeicaoController();
+
+			List<Alimento> a = refeicao.getListAlimentos();
+			for (Alimento alimento : a) {
+				ctrl.insert(id, alimento.getId(), alimento.getQuantidade());
+			}
+		}
 
 		this.revalidateRegisters();
 
@@ -66,7 +86,13 @@ public class RefeicaoController implements TableModel, ListSelectionListener {
 		if (refeicao.getId() <= 0)
 			return "Não foi possível realizar a alteração do item.";
 
-		boolean result = dao.update(refeicao);
+		boolean result = false;
+		try {
+			result = dao.update(refeicao);
+		} catch (RefeicaoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		this.revalidateRegisters();
 
@@ -76,7 +102,13 @@ public class RefeicaoController implements TableModel, ListSelectionListener {
 	public String deletar(long id) {
 		RefeicaoDAO dao = new RefeicaoDAOImpl();
 
-		boolean result = dao.delete(id);
+		boolean result = false;
+		try {
+			result = dao.delete(id);
+		} catch (RefeicaoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		this.revalidateRegisters();
 
@@ -86,19 +118,43 @@ public class RefeicaoController implements TableModel, ListSelectionListener {
 	public Refeicao selecionarPorId(long id) {
 		RefeicaoDAO dao = new RefeicaoDAOImpl();
 
-		return dao.selectById(id);
+		Refeicao refeicao = null;
+		try {
+			refeicao = dao.selectById(id);
+		} catch (RefeicaoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return refeicao;
 	}
 
 	public List<Refeicao> selecionarPorUsuario(long id) {
 		RefeicaoDAO dao = new RefeicaoDAOImpl();
 
-		return dao.selectByUsuario(id);
+		List<Refeicao> refeicoes = null;
+		try {
+			refeicoes = dao.selectByUsuario(id);
+		} catch (RefeicaoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return refeicoes;
 	}
 
 	public List<Refeicao> selecionarTodos(Date data, long user) {
 		RefeicaoDAO dao = new RefeicaoDAOImpl();
 
-		return dao.selectByDateAndUsuario(data, user);
+		List<Refeicao> refeicoes = null;
+		try {
+			refeicoes = dao.selectByDateAndUsuario(data, user);
+		} catch (RefeicaoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return refeicoes;
 	}
 
 	/**
@@ -198,6 +254,11 @@ public class RefeicaoController implements TableModel, ListSelectionListener {
 	private void revalidateRegisters() {
 		RefeicaoDAO dao = new RefeicaoDAOImpl();
 
-		listaRefeicoes = dao.selectByDateAndUsuario(data, idUsuario);
+		try {
+			listaRefeicoes = dao.selectByDateAndUsuario(data, idUsuario);
+		} catch (RefeicaoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

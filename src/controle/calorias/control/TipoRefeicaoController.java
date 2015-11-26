@@ -3,6 +3,8 @@ package controle.calorias.control;
 import java.util.List;
 
 import controle.calorias.model.TipoRefeicao;
+import resource.dao.TipoRefeicaoDAO;
+import resource.dao.TipoRefeicaoDAOImpl;
 
 public class TipoRefeicaoController {
 

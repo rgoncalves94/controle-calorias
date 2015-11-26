@@ -19,7 +19,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 	}
 
 	@Override
-	public long insert(Alimento alimento) {
+	public long insert(Alimento alimento) throws AlimentoDAOException {
 		long id = 0;
 		try {
 			String query = "INSERT INTO alimento (nome, valor_energetico, id_porcao, valor_porcao, proteinas, "
@@ -47,14 +47,14 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 			id = r.getLong(1);
 
 		} catch (SQLException e) {
-			new AlimentoDAOException("Erro ao Inserir");
+			throw new AlimentoDAOException("Erro ao Inserir");
 		}
 
 		return id;
 	}
 
 	@Override
-	public boolean update(Alimento alimento) {
+	public boolean update(Alimento alimento) throws AlimentoDAOException {
 		boolean status = false;
 		try {
 			String query = "UPDATE alimento SET nome=?, valor_energetico=?, id_porcao=?, valor_porcao=?, proteinas=?, fibras=?, carboidratos=?, sodio=?, gorduras_totais=?, gorduras_saturadas=?, gorduras_trans=? WHERE  id=?;";
@@ -80,13 +80,13 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 			status = (rowsAffected == 1) ? true : false;
 
 		} catch (SQLException e) {
-			new AlimentoDAOException("Erro ao atualizar");
+			throw new AlimentoDAOException("Erro ao atualizar");
 		}
 		return status;
 	}
 
 	@Override
-	public boolean delete(long id) {
+	public boolean delete(long id) throws AlimentoDAOException {
 		boolean status = false;
 		try {
 			String query = "DELETE FROM alimento WHERE id = ?;";
@@ -96,14 +96,14 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 
 			status = (stmt.executeUpdate() == 1) ? true : false;
 		} catch (SQLException e) {
-			new AlimentoDAOException("Erro ao Deletar");
+			throw new AlimentoDAOException("Erro ao Deletar");
 		}
 
 		return status;
 	}
 
 	@Override
-	public Alimento selectById(long id) {
+	public Alimento selectById(long id) throws AlimentoDAOException {
 		Alimento alimento = null;
 		try {
 			String query = "SELECT * FROM alimento WHERE id = ?;";
@@ -132,14 +132,14 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 			alimento.setGordurasTrans(resultados.getDouble("gorduras_trans"));
 
 		} catch (SQLException e) {
-			new AlimentoDAOException("Erro ao Selecionar por ID");
+			throw new AlimentoDAOException("Erro ao Selecionar por ID");
 
 		}
 		return alimento;
 	}
 
 	@Override
-	public List<Alimento> selectByName(String name) {
+	public List<Alimento> selectByName(String name) throws AlimentoDAOException {
 		List<Alimento> alimentos = null;
 		try {
 			String query = "SELECT * FROM alimento WHERE nome LIKE ?;";
@@ -173,13 +173,13 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 
 			}
 		} catch (SQLException e) {
-			new AlimentoDAOException("Erro ao Selecionar por ID");
+			throw new AlimentoDAOException("Erro ao Selecionar por ID");
 		}
 		return alimentos;
 	}
 
 	@Override
-	public List<Alimento> selectAll() {
+	public List<Alimento> selectAll() throws AlimentoDAOException {
 		List<Alimento> alimentos = null;
 		try {
 			String query = "SELECT a.*, p.desc FROM alimento a INNER JOIN porcao p ON a.id_porcao = p.id;";
@@ -212,7 +212,7 @@ public class AlimentoDAOImpl implements AlimentoDAO {
 
 			}
 		} catch (SQLException e) {
-			new AlimentoDAOException("Erro ao Selecionar por ID");
+			throw new AlimentoDAOException("Erro ao Selecionar por ID");
 		}
 		return alimentos;
 	}

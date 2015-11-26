@@ -23,7 +23,7 @@ public class TipoRefeicao {
 	@Override
 	public String toString() {
 
-		return id + " - " + descricao;
+		return descricao;
 	}
 
 }

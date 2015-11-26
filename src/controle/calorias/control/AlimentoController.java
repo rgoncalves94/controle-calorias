@@ -18,6 +18,7 @@ import controle.calorias.model.AtividadeFisica;
 import controle.calorias.model.Porcao;
 import controle.calorias.view.AdministrativoViewer;
 import resource.dao.AlimentoDAO;
+import resource.dao.AlimentoDAOException;
 import resource.dao.AlimentoDAOImpl;
 
 public class AlimentoController implements TableModel, ListSelectionListener, ActionListener, KeyListener {
@@ -28,7 +29,12 @@ public class AlimentoController implements TableModel, ListSelectionListener, Ac
 
 	public AlimentoController(AdministrativoViewer form) {
 		AlimentoDAO dao = new AlimentoDAOImpl();
-		listaAlimentos = dao.selectAll();
+		try {
+			listaAlimentos = dao.selectAll();
+		} catch (AlimentoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		PorcaoController pc = new PorcaoController();
 
@@ -44,7 +50,13 @@ public class AlimentoController implements TableModel, ListSelectionListener, Ac
 	public String adicionar(Alimento alimento) {
 		AlimentoDAO dao = new AlimentoDAOImpl();
 
-		long id = dao.insert(alimento);
+		long id = 0;
+		try {
+			id = dao.insert(alimento);
+		} catch (AlimentoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		this.revalidateRegisters();
 
@@ -57,7 +69,13 @@ public class AlimentoController implements TableModel, ListSelectionListener, Ac
 		if (alimento.getId() <= 0)
 			return "Não foi possível realizar a alteração do item.";
 
-		boolean result = dao.update(alimento);
+		boolean result = false;
+		try {
+			result = dao.update(alimento);
+		} catch (AlimentoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		this.revalidateRegisters();
 
@@ -68,7 +86,13 @@ public class AlimentoController implements TableModel, ListSelectionListener, Ac
 
 		AlimentoDAO dao = new AlimentoDAOImpl();
 
-		boolean result = dao.delete(id);
+		boolean result = false;
+		try {
+			result = dao.delete(id);
+		} catch (AlimentoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		this.revalidateRegisters();
 
@@ -77,21 +101,43 @@ public class AlimentoController implements TableModel, ListSelectionListener, Ac
 
 	public Alimento selecionaPorId(long id) {
 		AlimentoDAO dao = new AlimentoDAOImpl();
+		Alimento alimento = null;
+		try {
+			alimento = dao.selectById(id);
+		} catch (AlimentoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-		return dao.selectById(id);
+		return alimento;
 	}
 
 	public List<Alimento> selecionaPorNome(String nome) {
 		AlimentoDAO dao = new AlimentoDAOImpl();
 
-		return dao.selectByName(nome);
+		List<Alimento> alimentos = null;
+		try {
+			alimentos = dao.selectByName(nome);
+		} catch (AlimentoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return alimentos;
+
 	}
 
 	public List<Alimento> selecionaTodos() {
 
 		AlimentoDAO dao = new AlimentoDAOImpl();
 
-		return dao.selectAll();
+		List<Alimento> alimentos = null;
+		try {
+			alimentos = dao.selectAll();
+		} catch (AlimentoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return alimentos;
 	}
 
 	@Override
@@ -304,7 +350,12 @@ public class AlimentoController implements TableModel, ListSelectionListener, Ac
 	private void revalidateRegisters() {
 		AlimentoDAO dao = new AlimentoDAOImpl();
 
-		listaAlimentos = dao.selectAll();
+		try {
+			listaAlimentos = dao.selectAll();
+		} catch (AlimentoDAOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	void atualizarTabela() {

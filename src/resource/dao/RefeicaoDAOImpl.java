@@ -22,7 +22,7 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 	}
 
 	@Override
-	public long insert(Refeicao refeicao) {
+	public long insert(Refeicao refeicao) throws RefeicaoDAOException {
 		long id = 0;
 		try {
 			String query = "INSERT INTO refeicao (id_usuario, data_refeicao, id_tipo_refeicao) VALUES (?, ?, ?);";
@@ -40,14 +40,14 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 			id = r.getLong(1);
 
 		} catch (SQLException e) {
-			new RefeicaoDAOException("Erro ao Inserir");
+			throw new RefeicaoDAOException("Erro ao Inserir");
 		}
 
 		return id;
 	}
 
 	@Override
-	public boolean update(Refeicao refeicao) {
+	public boolean update(Refeicao refeicao) throws RefeicaoDAOException {
 		boolean status = false;
 		try {
 			String query = "UPDATE refeicao SET id_usuario=?, data_refeicao=?, id_tipo_refeicao=? WHERE  id=?;";
@@ -60,14 +60,14 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 			status = (stmt.executeUpdate() == 1) ? true : false;
 
 		} catch (SQLException e) {
-			new RefeicaoDAOException("Erro ao atualizar");
+			throw new RefeicaoDAOException("Erro ao atualizar");
 		}
 
 		return status;
 	}
 
 	@Override
-	public boolean delete(long id) {
+	public boolean delete(long id) throws RefeicaoDAOException {
 		boolean status = false;
 		try {
 			String query = "DELETE FROM refeicao WHERE id = ?";
@@ -77,14 +77,14 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 
 			status = (stmt.executeUpdate() == 1) ? true : false;
 		} catch (SQLException e) {
-			new RefeicaoDAOException("Erro ao Deletar");
+			throw new RefeicaoDAOException("Erro ao Deletar");
 		}
 
 		return status;
 	}
 
 	@Override
-	public Refeicao selectById(long id) {
+	public Refeicao selectById(long id) throws RefeicaoDAOException {
 		Refeicao refeicao = null;
 		try {
 			String query = "SELECT * FROM refeicao WHERE id = ?";
@@ -106,14 +106,14 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 			refeicao.getTipoRefeicao().setId(resultados.getInt("id_tipo_refeicao"));
 
 		} catch (SQLException e) {
-			new RefeicaoDAOException("Erro ao Selecionar por ID");
+			throw new RefeicaoDAOException("Erro ao Selecionar por ID");
 
 		}
 		return refeicao;
 	}
 
 	@Override
-	public List<Refeicao> selectByUsuario(long usuario) {
+	public List<Refeicao> selectByUsuario(long usuario) throws RefeicaoDAOException {
 		List<Refeicao> refeicoes = null;
 		try {
 			String query = "SELECT * FROM refeicao WHERE id_usuario = ?";
@@ -140,13 +140,13 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 
 			}
 		} catch (SQLException e) {
-			new RefeicaoDAOException("Erro ao Selecionar por ID");
+			throw new RefeicaoDAOException("Erro ao Selecionar por ID");
 		}
 		return refeicoes;
 	}
 
 	@Override
-	public List<Refeicao> selectByDateAndUsuario(Date data, long usuario) {
+	public List<Refeicao> selectByDateAndUsuario(Date data, long usuario) throws RefeicaoDAOException {
 		List<Refeicao> refeicoes = null;
 		try {
 			String query = "SELECT * FROM refeicao WHERE id_usuario = ? AND DATE(data_refeicao) = DATE(?);";
@@ -174,7 +174,7 @@ public class RefeicaoDAOImpl implements RefeicaoDAO {
 
 			}
 		} catch (SQLException e) {
-			new RefeicaoDAOException("Erro ao Selecionar por ID");
+			throw new RefeicaoDAOException("Erro ao Selecionar por ID");
 		}
 		return refeicoes;
 	}

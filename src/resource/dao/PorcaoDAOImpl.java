@@ -17,7 +17,7 @@ public class PorcaoDAOImpl implements PorcaoDAO {
 		conn = ResourceManager.getInstance().getConnection();
 	}
 
-	public List<Porcao> selectAll() {
+	public List<Porcao> selectAll() throws PorcaoDAOException {
 		List<Porcao> porcoes = null;
 
 		try {
@@ -37,7 +37,7 @@ public class PorcaoDAOImpl implements PorcaoDAO {
 			}
 
 		} catch (SQLException e) {
-			new PorcaoDAOException("Erro ao selecionar todos os registros.");
+			throw new PorcaoDAOException("Erro ao selecionar todos os registros.");
 		}
 
 		return porcoes;
