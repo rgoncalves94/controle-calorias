@@ -3,21 +3,37 @@ package controle.calorias.control;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
 
 import controle.calorias.model.RegistroAtividadeFisica;
+import controle.calorias.model.Usuario;
+import controle.calorias.view.RegistroAtividadeFisicaViewer;
 import resource.dao.RegistroAtividadeFisicaDAO;
 
 public class RegistroAtividadeFisicaController implements TableModel, ActionListener{
 	private List<RegistroAtividadeFisica> lista;
 	private RegistroAtividadeFisicaDAO registroAtividadeFisicaDAO;
+	private RegistroAtividadeFisicaViewer formulario;
 	
-	@Override
-	public void addTableModelListener(TableModelListener arg0) {
-		lista = new ArrayList<>();
+	public RegistroAtividadeFisicaController(RegistroAtividadeFisicaViewer formulario, Usuario usuario, Date data) {
+		this.formulario = formulario;
+		registroAtividadeFisicaDAO = new RegistroAtividadeFisicaDAO();
+		lista = registroAtividadeFisicaDAO.selectAll(usuario.getId(), data);
+	}
+	
+	public void adicionar(RegistroAtividadeFisica registro){
+		registroAtividadeFisicaDAO.insert(registro);
+		lista.add(registro);
+		atualizarTabela();
+	}
+	
+	public void atualizarTabela(){
+		formulario.getTabela().revalidate();
+		formulario.getTabela().repaint();
 	}
 
 	@Override
@@ -51,15 +67,32 @@ public class RegistroAtividadeFisicaController implements TableModel, ActionList
 	public int getRowCount() {
 		return lista.size();
 	}
+	
+	@Override
+	public void setValueAt(Object arg0, int arg1, int arg2) {
+		
+	}
 
 	@Override
-	public Object getValueAt(int arg0, int arg1) {
-		return null;
+	public Object getValueAt(int rowIndex, int columnIndex) {
+		double gasto = lista.get(rowIndex).getDuracao() * lista.get(rowIndex).getAtividade().getGastoCalorico();
+		
+		switch (columnIndex) {
+		case 0: return lista.get(rowIndex).getAtividade().getNome();
+		case 1: return lista.get(rowIndex).getDuracao();
+		case 2: return gasto;
+		}
+		return "";
 	}
 
 	@Override
 	public boolean isCellEditable(int arg0, int arg1) {
 		return false;
+	}
+	
+	@Override
+	public void addTableModelListener(TableModelListener arg0) {
+		lista = new ArrayList<>();
 	}
 
 	@Override
@@ -68,12 +101,11 @@ public class RegistroAtividadeFisicaController implements TableModel, ActionList
 	}
 
 	@Override
-	public void setValueAt(Object arg0, int arg1, int arg2) {
-		
-	}
-
-	@Override
 	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
 		
+		if (cmd.equals("Salvar")) {
+			adicionar(formulario.viewToControl());
+		}
 	}
 }

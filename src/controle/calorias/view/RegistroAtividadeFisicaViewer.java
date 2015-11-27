@@ -5,6 +5,8 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.BorderFactory;
@@ -22,17 +24,20 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
+
 import controle.calorias.control.RegistroAtividadeFisicaController;
 import controle.calorias.model.AtividadeFisica;
+import controle.calorias.model.RegistroAtividadeFisica;
+import controle.calorias.model.Usuario;
 import resource.dao.AtividadeFisicaDao;
 import resource.events.MouseEvents;
 
 public class RegistroAtividadeFisicaViewer implements ItemListener{
+	private RegistroAtividadeFisicaController ctrlRegistroAtividadeFisica;
 	
 	private JFrame frame;
 	private JPanel contentPane;
 	private JScrollPane pnlTabela;
-	private RegistroAtividadeFisicaController ctrlRegistroAtividadeFisica;
 	private JTable tabela;
 	private JPanel PnlFormulario;
 	private JButton btnIncluir;
@@ -42,9 +47,12 @@ public class RegistroAtividadeFisicaViewer implements ItemListener{
 	private JTextField txtGastoCalorico;
 //	private JTextField txtDuracao;
 	private JSpinner spnDuracao;
+	private Usuario usuario;
+	private List<AtividadeFisica> itensCombobox;
 
-	public RegistroAtividadeFisicaViewer() {
-		ctrlRegistroAtividadeFisica = new RegistroAtividadeFisicaController();
+	public RegistroAtividadeFisicaViewer(Usuario usuario) {
+		ctrlRegistroAtividadeFisica = new RegistroAtividadeFisicaController(this, usuario, new Date(System.currentTimeMillis()));
+		this.usuario = usuario;
 		
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
@@ -182,16 +190,29 @@ public class RegistroAtividadeFisicaViewer implements ItemListener{
 		return pnlTabela;
 	}
 	
-	public void carregarComboBox(){
-		AtividadeFisicaDao dao = new AtividadeFisicaDao();
-		List<AtividadeFisica> itens = dao.selectAll();
-		for (AtividadeFisica atividadeFisica : itens) {
-			cmbAtividades.addItem(atividadeFisica);			
-		}
+	public JTable getTabela() {
+		return tabela;
 	}
 	
-	public static void main(String[] args) {
-		new RegistroAtividadeFisicaViewer();
+	public RegistroAtividadeFisica viewToControl(){
+		RegistroAtividadeFisica registroAtividadeFisica = new RegistroAtividadeFisica();
+		int duracao = (int) (Double.parseDouble(spnDuracao.getValue().toString()) * 60);
+		
+		AtividadeFisica atividade = itensCombobox.get(cmbAtividades.getSelectedIndex());
+		
+		registroAtividadeFisica.setUsuario(usuario);
+		registroAtividadeFisica.setAtividade(atividade);
+		registroAtividadeFisica.setData(new Date(System.currentTimeMillis()));
+		registroAtividadeFisica.setDuracao(duracao);
+		return registroAtividadeFisica;
+	}
+	
+	public void carregarComboBox(){
+		AtividadeFisicaDao dao = new AtividadeFisicaDao();
+		itensCombobox = dao.selectAll();
+		for (AtividadeFisica atividadeFisica : itensCombobox) {
+			cmbAtividades.addItem(atividadeFisica);			
+		}
 	}
 
 	@Override

@@ -106,4 +106,9 @@ public class Usuario {
 	public void setHistorico(List<Historico> historico) {
 		this.historico = historico;
 	}
+	
+	@Override
+	public String toString() {
+		return getNome();
+	}
 }
