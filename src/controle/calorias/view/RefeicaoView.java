@@ -13,8 +13,6 @@ import controle.calorias.model.Alimento;
 import controle.calorias.model.Refeicao;
 import controle.calorias.model.TipoRefeicao;
 import controle.calorias.model.Usuario;
-import javafx.scene.control.SelectionModel;
-
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JComboBox;

@@ -4,9 +4,6 @@ public class Porcao {
 	private int id;
 	private String texto;
 
-	public Porcao() {
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -28,5 +25,4 @@ public class Porcao {
 		return id + " - " + texto;
 
 	}
-
 }

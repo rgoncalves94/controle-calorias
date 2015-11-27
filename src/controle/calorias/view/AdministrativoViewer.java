@@ -28,12 +28,14 @@ import controle.calorias.control.PorcaoController;
 import controle.calorias.model.Alimento;
 import controle.calorias.model.AtividadeFisica;
 import controle.calorias.model.Porcao;
+import controle.calorias.model.Usuario;
 import resource.events.MouseEvents;
 
 public class AdministrativoViewer implements ActionListener {
 	private AtividadeFisicaController ctrlAtividade = new AtividadeFisicaController(this);
 	private AlimentoController ctrlAlimento = new AlimentoController(this);
-
+	private Usuario usuario;
+	
 	private JFrame frame;
 	private JPanel contentPane;
 	private JPanel pnlCabecalho;
@@ -78,7 +80,9 @@ public class AdministrativoViewer implements ActionListener {
 	private JButton btnExcluirAlimento;
 	private JButton btnLimparAlimento;
 
-	public AdministrativoViewer() {
+	public AdministrativoViewer(Usuario usuario) {
+		this.usuario = usuario;
+		
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 		contentPane.add(getPnlCabecalho());
@@ -435,7 +439,7 @@ public class AdministrativoViewer implements ActionListener {
 		pnlAtividade.add(txtGastoCalorico);
 
 		btnSalvar = new JButton("     Salvar");
-		btnSalvar.setIcon(new ImageIcon(AdministrativoViewer.class.getResource("/resource/icons/save2.png")));
+		btnSalvar.setIcon(new ImageIcon(AdministrativoViewer.class.getResource("/resource/icons/salvar.png")));
 		btnSalvar.setActionCommand("Salvar");
 		btnSalvar.setBounds(107, 215, 268, 40);
 		btnSalvar.setForeground(colorTwo);
@@ -447,7 +451,7 @@ public class AdministrativoViewer implements ActionListener {
 		pnlAtividade.add(btnSalvar);
 
 		btnExcluir = new JButton("     Excluir");
-		btnExcluir.setIcon(new ImageIcon(AdministrativoViewer.class.getResource("/resource/icons/remove.png")));
+		btnExcluir.setIcon(new ImageIcon(AdministrativoViewer.class.getResource("/resource/icons/excluir.png")));
 		btnExcluir.setActionCommand("Excluir");
 		btnExcluir.setBounds(377, 215, 268, 40);
 		btnExcluir.setForeground(colorTwo);
@@ -459,7 +463,7 @@ public class AdministrativoViewer implements ActionListener {
 		pnlAtividade.add(btnExcluir);
 
 		btnLimpar = new JButton("     Limpar Campos");
-		btnLimpar.setIcon(new ImageIcon(AdministrativoViewer.class.getResource("/resource/icons/erase.png")));
+		btnLimpar.setIcon(new ImageIcon(AdministrativoViewer.class.getResource("/resource/icons/limpar.png")));
 		btnLimpar.setActionCommand("Limpar Campos");
 		btnLimpar.setBounds(647, 215, 268, 40);
 		btnLimpar.setForeground(colorTwo);
@@ -731,13 +735,9 @@ public class AdministrativoViewer implements ActionListener {
 			this.pnlAlimento.setVisible(false);
 			this.pnlAlimento.setEnabled(false);
 			this.txtNome.requestFocus();
-		} else if (cmd.equals("Voltar")) {
-			new PrincipalViewer();
+		} else if (cmd.equals("Voltar")){
+			new PrincipalViewer(usuario);
 			this.frame.dispose();
 		}
-	}
-
-	public static void main(String[] args) {
-		new AdministrativoViewer();
 	}
 }

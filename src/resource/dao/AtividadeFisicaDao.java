@@ -137,4 +137,31 @@ public class AtividadeFisicaDao {
 
 		return lista;
 	}
+	
+	public AtividadeFisica selectById(int id){
+		String query = "SELECT * FROM atividade_fisica WHERE nome LIKE ?;";
+		Connection con;
+		AtividadeFisica atividade = null;
+		
+		try {
+			con = JDBCUtil.getConnection();
+
+			PreparedStatement stmt = con.prepareStatement(query);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+			
+			if (rs.next()) {
+				atividade = new AtividadeFisica();
+				atividade.setId(rs.getInt(1));
+				atividade.setNome(rs.getString(2));
+				atividade.setGastoCalorico(rs.getFloat(3));				
+			}
+			
+			con.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		return atividade;
+	}
 }

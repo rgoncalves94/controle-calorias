@@ -21,7 +21,14 @@ import javax.swing.SwingConstants;
 import controle.calorias.control.RefeicaoController;
 import resource.events.MouseEvents;
 
-public class PrincipalViewer implements ActionListener {
+import controle.calorias.control.PrincipalController;
+import controle.calorias.model.Usuario;
+import resource.events.MouseEvents;
+
+public class PrincipalViewer{
+	private PrincipalController ctrlPrincipal;
+	private Usuario usuario;
+	
 	private JFrame frame;
 	private JPanel contentPane;
 	private JPanel pnlCabecalho;
@@ -54,8 +61,11 @@ public class PrincipalViewer implements ActionListener {
 	private JScrollPane scrollRefeicoes;
 	private JTable tableRefeicoes;
 
-	public PrincipalViewer() {
+	public PrincipalViewer(Usuario usuario) {
+		this.usuario = usuario;
+		ctrlPrincipal = new PrincipalController(this, this.usuario);
 		init();
+
 		contentPane = new JPanel();
 		contentPane.setLayout(null);
 		contentPane.add(getPnlCabecalho());
@@ -88,7 +98,7 @@ public class PrincipalViewer implements ActionListener {
 
 		btnAcessoAdministrativo = new JButton(" Acesso Administrativo");
 		btnAcessoAdministrativo.setActionCommand("AcessoAdm");
-		btnAcessoAdministrativo.addActionListener(this);
+		btnAcessoAdministrativo.addActionListener(ctrlPrincipal);
 		btnAcessoAdministrativo.setBounds(844, 5, 180, 20);
 		btnAcessoAdministrativo.setForeground(Color.WHITE);
 		btnAcessoAdministrativo.setBackground(Color.DARK_GRAY);
@@ -154,7 +164,7 @@ public class PrincipalViewer implements ActionListener {
 		diaAnterior.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.LIGHT_GRAY));
 		diaAnterior.setIcon(new ImageIcon(PrincipalViewer.class.getResource("/resource/icons/past.png")));
 		diaAnterior.setActionCommand("DiaAnterior");
-		diaAnterior.addActionListener(this);
+		diaAnterior.addActionListener(ctrlPrincipal);
 		pnlCalendario.add(diaAnterior);
 
 		diaPosterior = new JButton("");
@@ -164,7 +174,7 @@ public class PrincipalViewer implements ActionListener {
 		diaPosterior.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.LIGHT_GRAY));
 		diaPosterior.setIcon(new ImageIcon(PrincipalViewer.class.getResource("/resource/icons/next.png")));
 		diaPosterior.setActionCommand("DiaPosterior");
-		diaPosterior.addActionListener(this);
+		diaPosterior.addActionListener(ctrlPrincipal);
 		pnlCalendario.add(diaPosterior);
 
 		return pnlCalendario;
@@ -229,6 +239,8 @@ public class PrincipalViewer implements ActionListener {
 		btnAtualizarGasto.setForeground(colorTwo);
 		btnAtualizarGasto.setBackground(colorOne);
 		btnAtualizarGasto.setBorder(BorderFactory.createMatteBorder(1, 0, 1, 0, Color.LIGHT_GRAY));
+		btnAtualizarGasto.setActionCommand("AtualizarGasto");
+		btnAtualizarGasto.addActionListener(ctrlPrincipal);
 		pnlBotoes.add(btnAtualizarGasto);
 
 		btnGerarRelatorio = new JButton("Gerar Relatório");
@@ -276,30 +288,24 @@ public class PrincipalViewer implements ActionListener {
 		LocalDate d = LocalDate.of(ano, mes, dia);
 		return d;
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		String cmd = e.getActionCommand();
-
-		if (cmd.equals("AcessoAdm")) {
-			new AdministrativoViewer();
-			this.frame.dispose();
-		} else if (cmd.equals("DiaAnterior")) {
-			LocalDate d = getDataDoLblData();
-			d = d.minusDays(1);
-			data = d.format(formatador);
-			lblData.setText(data);
-		} else if (cmd.equals("DiaPosterior")) {
-			LocalDate d = getDataDoLblData();
-			d = d.plusDays(1);
-			data = d.format(formatador);
-			if (hoje.isAfter(d) || hoje.equals(d)) {
-				lblData.setText(data);
-			}
-		}
+	
+	public void dispose(){
+		frame.dispose();
 	}
 
-	public static void main(String[] args) {
-		new PrincipalViewer();
+	public String getData() {
+		return data;
+	}
+	
+	public void setData(String data) {
+		this.data = data;
+	}
+	
+	public JLabel getLblData() {
+		return lblData;
+	}
+	
+	public void setLblData(String valueData) {
+		this.lblData.setText(valueData);
 	}
 }

@@ -12,7 +12,7 @@ public class ResourceManager {
 	private final static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private final static String JDBC_URL = "jdbc:mysql://localhost:3306/slimsoft";
 	private final static String JDBC_USER = "root";
-	private final static String JDBC_PASS = "";
+	private final static String JDBC_PASS = "1234";
 
 	private static ResourceManager instance;
 	private Connection conn;

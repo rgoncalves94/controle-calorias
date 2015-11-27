@@ -10,7 +10,7 @@ public class JDBCUtil {
 	private static String JDBC_DRIVER = "com.mysql.jdbc.Driver";
 	private static String JDBC_URL = "jdbc:mysql://localhost/slimsoft";
 	private static String JDBC_USER = "root";
-	private static String JDBC_PASSWORD = "";
+	private static String JDBC_PASSWORD = "1234";
 	private static Driver driver = null;
 
 	public static synchronized Connection getConnection() throws SQLException {
